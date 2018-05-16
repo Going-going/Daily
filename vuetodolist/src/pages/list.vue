@@ -3,15 +3,12 @@
         <com-header title="列表"></com-header>
         <div class="content">
             <ul>
-                <!-- <li v-for="(item, key) in arr" :key="key"><img v-lazy="item" /></li> -->
-                <li>
-                    <img src="../assets/logo.png" alt="">
-                </li>
-                <li>
-                    <img src="../assets/logo.png" alt="">
-                </li>
-                <li>
-                    <img src="../assets/logo.png" alt="">
+                <li v-for="(item, key) in items" :key="key">
+                    <img :src="item.bookCover" alt="">
+                    <div>
+                      <p v-html="item.bookName"></p>
+                      <p>￥{{item.bookPrice}}元</p>
+                    </div>
                 </li>
             </ul>
             <com-loading :show="flag"></com-loading>
@@ -23,19 +20,19 @@
 export default {
   data() {
       return {
-          arr: [],
+          items: [],
           flag: true
       }
   },
   created() {
-    axios.get('http://127.0.0.1:9000/slide').then((data) => {
+    axios.get('http://127.0.0.1:9000/booklist').then((data) => {
       console.log(data);
       if(data.status == 200){
-        this.arr = data.data;
+        this.items = data.data;
         setTimeout(() => {
-          this.flag = false;          
+          this.flag = false;
         },3000)
-        
+
       }
       // console.log(JSON.parse(data.data));
     })
@@ -46,14 +43,14 @@ export default {
 			}, time);
 		})
 	};
-	
+
 	var start = async function () {
 		// 在这里使用起来就像同步代码那样直观
 		console.log('start');
 		await sleep(3000);
 		console.log('end');
 	};
-	
+
 	start();
   }
 }
@@ -66,14 +63,24 @@ export default {
 }
 li{
     width: 50%;
-    height: 200px;
-    background: red;
+    height: auto;
     font-size: 12px;
     display: inline-block;
-    padding: 8px;   
+    padding: 8px;
+  border-bottom:1px solid #e4e4e4;
+}
+li:nth-of-type(2n-1){
+  border-right:1px solid #e4e4e4;
 }
 li img{
-    width: 180px;
+    width: 100%;
     height:150px;
+}
+  li p{
+    line-height: 22px;
+    padding-left:10px;
+  }
+li p:last-child{
+  /*color: red;*/
 }
 </style>
