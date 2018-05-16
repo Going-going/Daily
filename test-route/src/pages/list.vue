@@ -3,7 +3,12 @@
         <com-header title="列表"></com-header>
         <div class="content">
             <ul>
-                <li v-for="(item, key) in arr" :key="key"><img v-lazy="item" /></li>
+                <!-- <li v-for="(item, key) in arr" :key="key"><img v-lazy="item" /></li> -->
+                <li>
+                    <img scr="static/3.jpg" />
+                </li>
+                <li>222</li>
+                <li>3333</li>
             </ul>
             <com-loading :show="flag"></com-loading>
         </div>
@@ -51,7 +56,19 @@ export default {
 </script>
 
 <style scoped>
+.content ul{
+    font-size: 0;
+    text-align: left;
+}
 li{
+    width: 50%;
+    height: 200px;
+    background: red;
+    font-size: 12px;
+    display: inline-block;
+}
+li img{
     width: 100%;
+    height:100px;
 }
 </style>
