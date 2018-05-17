@@ -24,7 +24,7 @@
 </template>
 <script>
 import {swiper, swiperSlide} from 'vue-awesome-swiper'
-import { getSlides, getBooklist } from '../api/index'
+import { getSlides, getHotbooks } from '../api/index'
 import axios from 'axios'
 import 'babel-polyfill'
 export default {
@@ -76,10 +76,10 @@ export default {
     var start = async () => {
         try {
             let slide = await getSlides();
-            let booklist = await getBooklist();
-              this.slides = slide.data;
-              this.bookList = booklist.data;
-              this.flag = false;
+            let booklist = await getHotbooks();
+            this.slides = slide.data;
+            this.bookList = booklist.data;
+            this.flag = false;
         } catch(err) {
             console.log(err);
         }
