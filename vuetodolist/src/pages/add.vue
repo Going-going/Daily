@@ -2,25 +2,25 @@
     <div class="container">
         <com-header title="添加"></com-header>
         <div class="content">
-          <form action="">
+          <form action="http://127.0.0.1:9000/addbook" method="post">
             <div>
-              <label for="">书名</label>
-              <input type="text" placeholder="请输入书名">
+              <label for="bookName">书名</label>
+              <input type="text" name="bookName" placeholder="请输入书名">
             </div>
             <div>
-              <label for="">价格</label>
-              <input type="text" placeholder="请输入价格">
+              <label for="bookPrice">价格</label>
+              <input type="text" name="bookPrice" placeholder="请输入价格">
             </div>
             <div>
-              <label for="">作者</label>
-              <input type="text" placeholder="请输入作者">
+              <label for="bookInfo">简介</label>
+              <input type="text" name="bookInfo" placeholder="请输入作者">
             </div>
             <div>
-              <label for="">简介</label>
-              <input type="text" placeholder="请输简介">
+              <label for="bookCover">封面</label>
+              <input type="text" name="bookCover" placeholder="请输简介">
             </div>
             <div>
-              <input type="submit" />
+              <input type="submit" value="添加" />
             </div>
           </form>
 
@@ -32,7 +32,7 @@
 export default {
   data() {
   	return {
-  		flag: true
+  		flag: false
   	}
   },
   mounted() {

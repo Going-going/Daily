@@ -9,6 +9,11 @@ export const getSlides = () => {
 
 }
 
+// 获取热门图书列表
+export const getHotbooks = () => {
+  return axios.get('/booklist?type=hot')
+}
+
 // 获取图书列表
 export const getBooklist = () => {
   return axios.get('/booklist')
