@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <com-header title="列表"></com-header>
+        <com-header title="收藏"></com-header>
         <div class="content">
             <ul>
                 <li v-for="(item, key) in items" :key="key">
@@ -8,6 +8,7 @@
                     <div>
                       <p v-html="item.bookName"></p>
                       <p>￥{{item.bookPrice}}元</p>
+                      <button @click="delect(item.id)">删除</button>
                     </div>
                 </li>
             </ul>
@@ -21,8 +22,22 @@ export default {
   data() {
       return {
           items: [],
-          flag: true
+          flag: false
       }
+  },
+  methods: {
+    delect(id) {
+      console.log('删除');
+      axios.delete('http://127.0.0.1:9000/booklist', {
+        data: {
+          id: id
+        }
+      }).then(function (res) { 
+        console.log(res);
+      }).catch(function(err) {
+        console.log(err);
+      })
+    }
   },
   created() {
     axios.get('http://127.0.0.1:9000/booklist').then((data) => {
@@ -68,6 +83,7 @@ li{
     display: inline-block;
     padding: 8px;
   border-bottom:1px solid #e4e4e4;
+  position: relative;
 }
 li:nth-of-type(2n-1){
   border-right:1px solid #e4e4e4;
@@ -82,5 +98,19 @@ li img{
   }
 li p:last-child{
   /*color: red;*/
+}
+button{
+  width: 40px;
+  height: 24px;
+  line-height: 22px;
+  border: 0;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 12px;
+  background: rgb(231, 176, 57);
+  border-radius: 5px;
+  color: #fff;
+  z-index: 9;
 }
 </style>

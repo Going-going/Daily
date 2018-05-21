@@ -2,7 +2,7 @@
     <div class="container">
         <com-header title="添加"></com-header>
         <div class="content">
-          <form action="http://127.0.0.1:9000/addabook" method="post" name="myform" @submit="check()">
+          <form action="http://127.0.0.1:9000/booklist" method="post" name="myform" @submit="check()">
             <div>
               <label for="bookName">书名</label>
               <input type="text" name="bookName" placeholder="请输入书名">
@@ -20,7 +20,7 @@
               <input type="text" name="bookCover" placeholder="请输简介">
             </div>
             <div> 
-              <input type="submit" name="submit" value="添加" />
+              <input type="submit" value="添加" />
             </div>
           </form> 
 			  <com-loading :show="flag"></com-loading>

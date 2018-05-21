@@ -31,69 +31,68 @@ function read(filename, cb) {
 }
 
 http.createServer((request, response) => { //输出文件为json格式
-	console.log(request.method);
-	response.setHeader('Content-Type', 'application/json;charset=utf8')
-	response.setHeader('Access-Control-Allow-Origin', '*')
+	console.log(request.url);
+	console.log(request.method)
+	response.writeHead(200, {
+		'Content-Type': 'application/json;charset=utf-8',
+		'Access-Control-Allow-Credentials': true,
+		'Access-Control-Allow-Origin': '*', //可以是*，也可以是跨域的地址
+		'Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS'
+	  })
+	  // 当执行put和delete等复杂请求的时候，浏览器会先发送一个options请求 给后端服务器。服务器如果同意，再发送put请求
+	  if(request.method == 'OPTIONS') return response.end();
 	// url模块的两个参数 pathname为/后的内容  query ？ 后的参数
-	let { pathname, query } = url.parse(request.url, true);//解构赋值\
-	// switch(request.method) {
-	// 	case 'GET':
-	// 	case 'POST': 
-	// }
-	
+	let { pathname, query } = url.parse(request.url, true);//解构赋值
+	// 轮播图
 	if (pathname === '/slide' || pathname === '/') {
 		read('slide.json', (data) => {
 			response.end(JSON.stringify(data))
 		})
 	}
-	if (pathname === '/booklist') {
+	//热门图书
+	if (pathname === '/hotbook') {
 		read('book.json', (data) => {
-			if(query.type === 'hot'){
-				var arr = data.slice(-6).reverse();
-				response.end(JSON.stringify(arr))
-			}else{
-				response.end(JSON.stringify(data))
-			}
+			var arr = data.slice(-6).reverse();
+			response.end(JSON.stringify(arr))
 		})
 	}
-	//添加
-	if(pathname === '/addbook'){
-		var body = '';
+	// 图书列表操作
+	if(pathname === '/booklist'){
 		var oldData = [];
-		read('book.json', function(data) {
-			oldData = data;
-			request.on('data', (chunk) => {
-				// buffer 转换？
-				body += chunk;
-			})
-	
-			request.on('end', () => {
-				body = querystring.parse(body);
-				body.id = oldData.length + 1;
-				oldData.push(body)
-				fs.writeFile('book.json', JSON.stringify(oldData), function(err) {
-					if (err) {
-						return console.error(err);
-					}
-					console.log("数据写入成功！");
-					response.writeHead(200,{'Content-Type':'text/html'});  
-					backUrl = 'http://localhost:8080/#/add'
-					response.end(backHtml(backUrl))
-				})
-			})
-		})
-	}
-	// 删除
-	if(pathname === 'book'){
-		var oldData = [],
-			body = '';
 		read('book.json', function (data) { 
 			oldData = data;
+			console.log(request.method)
 			switch(request.method) {
 				case 'GET':
+					response.end(JSON.stringify(data))
+					break;
 				case 'POST':
+					var body = '';
+					request.on('data', (chunk) => {
+						// buffer 转换？
+						body += chunk;
+					})
+			
+					request.on('end', () => {
+						body = querystring.parse(body);
+						body.id = oldData.length + 1;
+						oldData.push(body)
+						fs.writeFile('book.json', JSON.stringify(oldData), function(err) {
+							if (err) {
+								return console.error(err);
+							}
+							console.log("数据写入成功！");
+							response.writeHead(200,{'Content-Type':'text/html'});  
+							backUrl = 'http://localhost:8080/#/add'
+							response.end(backHtml(backUrl))
+						})
+					})
+					break;
 				case 'DELETE':
+					console.log('query')
+					break;
 				case 'PUT':
+					break;
 				default: 
 					break;
 			}
