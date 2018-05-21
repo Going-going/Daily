@@ -7,7 +7,7 @@
                     <img :src="item.bookCover" alt="">
                     <div>
                       <p v-html="item.bookName"></p>
-                      <p>￥{{item.bookPrice}}元</p>
+                      <p class="price">￥{{item.bookPrice}}元</p>
                     </div>
                 </li>
             </ul>
@@ -61,6 +61,11 @@ li img{
     height:150px;
 }
   li p{
+    width:70%;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     line-height: 22px;
     padding-left:10px;
   }

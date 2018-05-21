@@ -76,4 +76,9 @@ a {
 img{
   width: 100%;
 }
+  .price{
+    color: red;
+    font-weight:600;
+    font-size:14px;
+  }
 </style>
