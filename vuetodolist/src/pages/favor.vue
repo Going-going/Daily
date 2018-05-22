@@ -18,7 +18,8 @@
     </div>
 </template>
 <script>
-  import axios from 'axios'
+  // import axios from 'axios'
+  import {getBooks, deleteBook} from '../api/index'
 export default {
   data() {
       return {
@@ -31,49 +32,55 @@ export default {
       this.$router.push({path: '/change', query: {id: id}})
     },
     delect(id) {
-      console.log(id);
-      axios.delete('http://127.0.0.1:9000/booklist', {
-        params: {
-          id: id
+      let deletebook = async (id)=>{
+        try{
+           let returnBooks = await deleteBook(id);
+           this.items = returnBooks.data;
+           this.flag = false;
+        }catch(e){
+          console.log(e)
         }
-      }).then((res) => {
-        console.log(res);
-        this.items = res.data;
-        setTimeout(() => {
+      }
+      deletebook(id);
+      // axios.delete('http://127.0.0.1:9000/booklist', {
+      //   params: {
+      //     id: id
+      //   }
+      // }).then((res) => {
+      //   console.log(res);
+      //   this.items = res.data;
+      //   setTimeout(() => {
+      //     this.flag = false;
+      //   },3000)
+      // }).catch(function(err) {
+      //   console.log(err);
+      // })
+    },
+    getData() {
+      let getData = async () => {
+        try{
+          let books = await getBooks();
+          this.items = books.data;
           this.flag = false;
-        },3000)
-      }).catch(function(err) {
-        console.log(err);
-      })
+        }catch(e){
+          console.log(e)
+        }
+      }
+      getData()
     }
   },
   created() {
-    axios.get('http://127.0.0.1:9000/booklist').then((data) => {
-      console.log(data);
-      if(data.status == 200){
-        this.items = data.data;
-        setTimeout(() => {
-          this.flag = false;
-        },3000)
-
-      }
-    })
-    var sleep = function (time) {
-		return new Promise(function (resolve, reject) {
-			setTimeout(function () {
-				resolve()
-			}, time);
-		})
-	};
-
-	var start = async function () {
-		// 在这里使用起来就像同步代码那样直观
-		console.log('start');
-		await sleep(3000);
-		console.log('end');
-	};
-
-	start();
+    this.getData();
+  },
+  mounted () {
+    console.log(document.body.clientHeight);
+    console.log(1);
+    // console.log(document.document.offset)
+  },
+  watch: {
+    '$route': function () { 
+      this.getData();
+     }
   }
 }
 </script>

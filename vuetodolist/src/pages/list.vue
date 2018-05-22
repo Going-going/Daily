@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <com-header title="列表"></com-header>
-        <div class="content">
+        <div class="content" >
             <ul>
                 <li v-for="(item, key) in items" :key="key">
                     <img :src="item.bookCover" alt="">
@@ -17,6 +17,7 @@
 </template>
 <script>
   import axios from 'axios'
+  import {getBooks} from '../api/index'
 export default {
   data() {
       return {
@@ -24,24 +25,55 @@ export default {
           flag: true
       }
   },
-  created() {
-    axios.get('http://127.0.0.1:9000/booklist').then((data) => {
-      console.log(data);
-      if(data.status == 200){
-        this.items = data.data;
-        setTimeout(() => {
-          this.flag = false;
-        },3000)
-
+  methods: {
+    getData() {
+      var params = {
+        currpage: 2,
+        pagesize: 10
       }
-      // console.log(JSON.parse(data.data));
-    })
+      console.log(params);
+      var start = async () => {
+        try{
+          let books = await getBooks(params);
+          this.items = books.data.data;
+          this.flag = false;
+        }catch(err) {
+          console.log(err)
+        }
+      }
+      start();
+    },
+    handleScroll () {
+      var scrollTop = document.getElementsByClassName('content')[0].scrollTop;
+      var clientHeight = document.body.clientHeight;
+      var height = document.getElementsByClassName('content')[0].offsetHeight;
+      console.log(scrollTop,height, clientHeight)
+      // if(){
+
+      // }
+    },
+  },
+  created() {
+    this.getData()
+  },
+  mounted () {
+    console.log(document.body.clientHeight);
+    console.log(document.body.scrollTop )
+    window.addEventListener('scroll', this.handleScroll, true)
+  },
+  watch: {
+    '$route': function () { 
+        this.getData()
+     }
+
   }
 }
 </script>
 
 <style scoped>
 .content ul{
+  width: 100%;
+  height: auto;
     font-size: 0;
     text-align: left;
 }

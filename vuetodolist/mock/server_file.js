@@ -1,3 +1,9 @@
+/*
+ * @Author: zhaoyangyue 
+ * @Date: 2018-05-22 15:10:34 
+ * @Last Modified by: zhaoyangyue
+ * @Last Modified time: 2018-05-22 15:47:00
+ */
 const http = require('http')
 const url = require('url')
 const fs = require('fs')
@@ -24,23 +30,21 @@ function read(filename, cb) {
 			console.log(err)
 		} else {
 			i++;
-			console.log(i)
+			// console.log(i)
 			cb(JSON.parse(data))
 		}
 	})
 }
 
 http.createServer((request, response) => { //输出文件为json格式
-
-	response.writeHead(200, {
-		'Content-Type': 'application/json;charset=utf-8',
-		'Access-Control-Allow-Credentials': true,
-		'Access-Control-Allow-Origin': '*', //可以是*，也可以是跨域的地址
-		'Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS'
-	  })
-	  // 当执行put和delete等复杂请求的时候，浏览器会先发送一个options请求 给后端服务器。服务器如果同意，再发送put请求
-	  if(request.method == 'OPTIONS') return response.end();
-    console.log(request.method)
+	response.setHeader("Access-Control-Allow-Origin", "*");
+	response.setHeader("Access-Control-Allow-Headers", "Cache-Control,Content-Type,Hash-Referer,X-Requested-With");
+	response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+	response.setHeader("X-Powered-By",' 3.2.1');
+	response.setHeader('Content-type', 'application/json;charset=utf8');
+	// 当执行put和delete等复杂请求的时候，浏览器会先发送一个options请求 给后端服务器。服务器如果同意，再发送put请求
+	// 这里结束掉options的请求 然后再执行后面的方法
+	if(request.method == 'OPTIONS') return response.end();
 	// url模块的两个参数 pathname为/后的内容  query ？ 后的参数
 	let { pathname, query } = url.parse(request.url, true);//解构赋值
 	// 轮播图
@@ -58,13 +62,45 @@ http.createServer((request, response) => { //输出文件为json格式
 	}
 	// 图书列表操作
 	if(pathname === '/booklist'){
-	  console.log(request.method)
 		var oldData = [];
 		read('book.json', function (data) {
 			oldData = data;
 			switch(request.method) {
 				case 'GET':
-					response.end(JSON.stringify(data))
+					var returnData = {};
+					if(query.id){
+						console.log('获取单本书')
+						var item = data.filter(function(data, index) {
+							return data.id == query.id;
+						})
+						response.end(JSON.stringify(item));
+					}else{
+						/* 分页设置 
+							pagesize:每页条数
+							currpage:当前页数 
+							totalpage:总页数 
+						*/
+						let pagesize = 5;  //默认每页条数
+						if(query.pagesize) pagesize = query.pagesize;
+						console.log(query.currpage)
+						if(query.currpage){
+							var currpage = query.currpage;
+							if(data.length % pagesize != 0){
+								var totalpage = parseInt(data.length / pagesize) + 1;
+							}else{
+								var totalpage = parseInt(data.length / pagesize);
+							}
+							returnData.totalpage = totalpage;
+							returnData.currpage = currpage;
+							returnData.data = data.splice((currpage - 1) * pagesize, pagesize);
+							console.log('获取第'+currpage+'页数据')
+							response.end(JSON.stringify(returnData))
+						}else{
+							console.log('获取所有书')
+							response.end(JSON.stringify(data))
+						}
+						
+					}
 					break;
 				case 'POST':
 					var body = '';
@@ -75,7 +111,7 @@ http.createServer((request, response) => { //输出文件为json格式
 
 					request.on('end', () => {
 						body = querystring.parse(body);
-						body.id = oldData.length + 1;
+						body.id = oldData[oldData.length - 1].id + 1;
 						oldData.push(body)
 						fs.writeFile('book.json', JSON.stringify(oldData), function(err) {
 							if (err) {
@@ -101,7 +137,25 @@ http.createServer((request, response) => { //输出文件为json格式
 					response.end(JSON.stringify(data))
 					break;
 				case 'PUT':
-				  console.log(query)
+				case 'PATCH':
+					var body = '';
+					request.on('data', (chunk) => {
+						// buffer 转换？
+						body += chunk;
+					}) 
+					request.on('end', ()=>{
+						body = JSON.parse(body);
+						oldData.forEach(function (item, index) { 
+							if(item.id == body.id){
+								oldData.splice(index, 1, body)
+							}
+						})
+						response.end(JSON.stringify(oldData))
+						fs.writeFile('book.json', JSON.stringify(oldData), function (err) { 
+							if(err) return console.log(err)
+							console.log('文件修改完成');
+						 })
+					})
 					break;
 				default:
 					break;

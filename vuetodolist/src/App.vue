@@ -66,12 +66,12 @@ a {
 .content{
     width: 100%;
     height: 84%;
-    overflow: auto;
     position: fixed;
     top: 1rem;
     background: rgb(255, 255, 255);
     text-align: center;
-    /*padding-bottom: 2rem;*/
+    overflow: auto;
+    /* padding-bottom: 2rem; */
 }
 img{
   width: 100%;

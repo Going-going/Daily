@@ -27,6 +27,7 @@
 </template>
 <script>
   import axios from 'axios'
+  import {changeBook, getBook} from '../api/index'
 export default {
   data() {
   	return {
@@ -56,31 +57,36 @@ export default {
      return true;
     },
     getData(id) {
-      axios.get('http://127.0.0.1:9000/booklist').then((data) => {
-        if(data.status == 200){
-          this.items = data.data;
-          for(var i in this.items){
-            if(id == this.items[i].id){
-              this.curItem = this.items[i];
-//              console.log(this.curItem)
-            }
-          }
-          setTimeout(() => {
-            this.flag = false;
-          },3000)
-
-        }
-      })
+      let getItem = async () => {
+        let item = await getBook(id)
+        // console.log(item.data);
+        this.curItem = item.data[0]
+      }
+      getItem()
     },
     submit(){
       console.log(this.curItem)
-      axios.put('http://127.0.0.1:9000/booklist', {
-        params: JSON.stringify(this.curItem)
-      }).then((res) => {
-        console.log(res);
-      }).catch((err) => {
-        console.log(err)
-      })
+      let send = async () => {
+        try {
+          let item = await changeBook(this.curItem)
+          console.log(item)
+          this.$router.go(-1);
+        }catch(e) {
+          console.log(e)
+        }
+      }
+      send()
+      // axios.put('http://127.0.0.1:9000/booklist', {
+      //   data: this.curItem
+      // },{
+      //   headers: {
+      //         'Content-Type': 'application/x-www-form-urlencoded'
+      //   }
+      // }).then((res) => {
+      //   console.log(res);
+      // }).catch((err) => {
+      //   console.log(err)
+      // })
     }
   },
   created() {
@@ -103,7 +109,7 @@ export default {
       '$route': function () {
         var id = this.$route.query.id,
           $this = this;
-        this.getData(id)
+        // this.getData(id)
       }
   }
 }
