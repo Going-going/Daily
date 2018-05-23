@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <com-header title="列表"></com-header>
-        <div class="content" >
-            <ul>
+        <div class="content" @scroll="handleScroll">
+            <ul class="datalist">
                 <li v-for="(item, key) in items" :key="key">
                     <img :src="item.bookCover" alt="">
                     <div>
@@ -10,6 +10,9 @@
                       <p class="price">￥{{item.bookPrice}}元</p>
                     </div>
                 </li>
+                <div class="loading">
+                  正在加载...
+                </div>
             </ul>
             <com-loading :show="flag"></com-loading>
         </div>
@@ -22,44 +25,72 @@ export default {
   data() {
       return {
           items: [],
-          flag: true
+          flag: true,
+          // params: {
+          //   currpage: 1,
+          //   pagesize: 10
+          // },
+          params: {
+            offset: 20,
+            // currpage: 1,
+            pagesize: 10
+          },
+          totalpage: 0,
+          locked: false
       }
   },
   methods: {
     getData() {
-      var params = {
-        currpage: 2,
-        pagesize: 10
-      }
-      console.log(params);
       var start = async () => {
         try{
-          let books = await getBooks(params);
-          this.items = books.data.data;
+          let books = await getBooks(this.params);
+          this.totalpage = books.data.totalpage;
+          books.data.data.forEach((item, index) => {
+            this.items.push(item);
+          });
           this.flag = false;
+          this.locked = false;
+          document.getElementsByClassName('loading')[0].style.display = 'none';
         }catch(err) {
           console.log(err)
         }
       }
-      start();
+      setTimeout(function () { 
+        start();
+      }, 2000)
+      
     },
     handleScroll () {
+      var headH = document.getElementsByTagName('header')[0].offsetHeight + 2;
+      var footH = document.getElementsByTagName('footer')[0].offsetHeight;
       var scrollTop = document.getElementsByClassName('content')[0].scrollTop;
       var clientHeight = document.body.clientHeight;
-      var height = document.getElementsByClassName('content')[0].offsetHeight;
-      console.log(scrollTop,height, clientHeight)
-      // if(){
-
-      // }
-    },
+      var height = document.getElementsByClassName('datalist')[0].offsetHeight;
+      if(!this.locked){
+        if((scrollTop + clientHeight-headH-footH) >= height){
+          console.log(this.currpage)
+          this.locked = !this.locked;
+          if(this.params.currpage < this.totalpage){
+            document.getElementsByClassName('loading')[0].style.display = 'block';
+              this.params.currpage++;
+              this.getData();
+          }else{
+            document.getElementsByClassName('loading')[0].style.display = 'block';
+            document.getElementsByClassName('loading')[0].innerHTML = '--END--';
+            return false;
+          }
+        }
+      }
+    }
   },
   created() {
     this.getData()
   },
   mounted () {
-    console.log(document.body.clientHeight);
-    console.log(document.body.scrollTop )
-    window.addEventListener('scroll', this.handleScroll, true)
+
+  },
+  destroyed () {
+    this.handleScroll;
   },
   watch: {
     '$route': function () { 
@@ -71,11 +102,16 @@ export default {
 </script>
 
 <style scoped>
+.content{
+position: relative;
+}
 .content ul{
   width: 100%;
   height: auto;
     font-size: 0;
     text-align: left;
+    position: relative;
+    /* padding-bottom: 40px; */
 }
 li{
     width: 50%;
@@ -103,5 +139,16 @@ li img{
   }
 li p:last-child{
   /*color: red;*/
+}
+.loading{
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  /* position: absolute;
+  bottom: 0;
+  left: 0; */
+  line-height: 40px;
+  font-size: 13px;
+  display: none;
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: zhaoyangyue 
  * @Date: 2018-05-22 15:10:34 
  * @Last Modified by: zhaoyangyue
- * @Last Modified time: 2018-05-22 15:47:00
+ * @Last Modified time: 2018-05-23 16:10:44
  */
 const http = require('http')
 const url = require('url')
@@ -75,31 +75,38 @@ http.createServer((request, response) => { //输出文件为json格式
 						})
 						response.end(JSON.stringify(item));
 					}else{
+						console.log(data.length)
+						
 						/* 分页设置 
 							pagesize:每页条数
 							currpage:当前页数 
 							totalpage:总页数 
+							offset: 偏移 需要从第几条数据开始加载
+							hasmore: 是否还有下一页
 						*/
 						let pagesize = 5;  //默认每页条数
+						let offset = 0;   // 默认从第0条开始加载
+						console.log(query)
 						if(query.pagesize) pagesize = query.pagesize;
-						console.log(query.currpage)
+						if(query.offset) offset = query.offset;
+						var newData =  data.slice(offset)
 						if(query.currpage){
 							var currpage = query.currpage;
-							if(data.length % pagesize != 0){
-								var totalpage = parseInt(data.length / pagesize) + 1;
+							if(newData.length % pagesize != 0){
+								var totalpage = parseInt(newData.length / pagesize) + 1;
 							}else{
-								var totalpage = parseInt(data.length / pagesize);
+								var totalpage = parseInt(newData.length / pagesize);
 							}
 							returnData.totalpage = totalpage;
 							returnData.currpage = currpage;
-							returnData.data = data.splice((currpage - 1) * pagesize, pagesize);
+							returnData.data = newData.splice((currpage - 1) * pagesize, pagesize);
 							console.log('获取第'+currpage+'页数据')
 							response.end(JSON.stringify(returnData))
 						}else{
-							console.log('获取所有书')
-							response.end(JSON.stringify(data))
+							console.log('获取所有书');
+							returnData.data = newData;
+							response.end(JSON.stringify(returnData))
 						}
-						
 					}
 					break;
 				case 'POST':
