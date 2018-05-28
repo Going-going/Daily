@@ -1,8 +1,11 @@
 # vue
 
-> A Vue.js project
-
-## Build Setup
+> A Vue.js project & node服务
+## 启动node服务 找到mock文件夹 并在此文件夹打开终端
+```
+e:\private\vuetodolist\mock> node server.js
+```
+## vue Build Setup
 
 ``` bash
 # install dependencies
