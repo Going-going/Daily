@@ -23,9 +23,8 @@
                 <thead>
                     <th>id</th>
                     <th>姓名</th>
-                    <th>年龄</th>
                     <th>性别</th>
-                    <th>手机号</th>
+                    <th>电话</th>
                     <th>地址</th>
                     <th>操作</th>
                 </thead>
@@ -33,24 +32,22 @@
                     <tr>
                         <td>0</td>
                         <td>赵扬悦</td>
-                        <td>13456445677</td>
-                        <td>23</td>
                         <td>女</td>
+                        <td>13456445677</td>
                         <td>山东省青岛市</td>
                         <td>
-                            <button class='btn btn-success'>修改</button>
+                            <button class='btn btn-success' data-toggle="modal" data-target="#myModal1">修改</button>
                             <button class="btn btn-danger">删除</button>
                         </td>
                     </tr>
                     <tr>
-                        <td>0</td>
+                        <td>1</td>
                         <td>赵扬悦</td>
-                        <td>13456445677</td>
-                        <td>23</td>
                         <td>女</td>
+                        <td>13456445677</td>
                         <td>山东省青岛市</td>
                         <td>
-                            <button class='btn btn-success'>修改</button>
+                            <button class='btn btn-success' data-toggle="modal" data-target="#myModal1">修改</button>
                             <button class="btn btn-danger">删除</button>
                         </td>
                     </tr>
@@ -68,37 +65,82 @@
                         <h4 class="modal-title" id="myModalLabel">添加个人信息</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="addform">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">姓名</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">电话</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">电话</label>
-                                <input type="text" class="form-control" id="address" placeholder="Password">
+                                <label for="name">姓名</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="姓名">
                             </div>
                             <div class="checkbox">
-                                <label for="sex">
-                                    <input type="radio" name="sex">男
-                                    <input type="radio" name="sex">女
+                                <label for="sexy">
+                                    <input type="radio" name="sexy" value="男">男
                                 </label>
+                                <label for="sexy">
+                                    <input type="radio" name="sexy" value="女">女
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="tel">电话</label>
+                                <input type="tel" class="form-control" name="tel" id="tel" placeholder="13706342556">
+                            </div>  
+                            <div class="form-group">
+                                <label for="address">地址</label>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="address">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary submit">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">添加个人信息</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="text" hidden name="id" value="" />
+                                <div class="form-group">
+                                    <label for="name">姓名</label>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="姓名">
+                                </div>
+                                <div class="checkbox">
+                                    <label for="sexy">
+                                        <input type="radio" name="sexy" value="男">男
+                                    </label>
+                                    <label for="sexy">
+                                        <input type="radio" name="sexy" value="女">女
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tel">电话</label>
+                                    <input type="tel" class="form-control" name="tel" id="tel" placeholder="13706342556">
+                                </div>  
+                                <div class="form-group">
+                                    <label for="address">地址</label>
+                                    <input type="text" class="form-control" name="address" id="address" placeholder="address">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary submit">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </body>
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/index.js"></script>
 
 </html>
