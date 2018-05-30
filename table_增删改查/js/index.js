@@ -33,6 +33,7 @@ $(function() {
                     id: id
                 },
                 success: function (res) {  
+                    console.log(res);
                     var html = '';
                     res.data.forEach((item, key) => {
                         html += `<tr>

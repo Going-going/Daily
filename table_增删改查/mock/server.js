@@ -21,6 +21,16 @@ const server = http.createServer((req, res) => {
 	res.setHeader('Content-type', 'application/json;charset=utf8');
 
     var {pathname, query} = url.parse(req.url, true);
+    // 静态资源文件处理
+    let reg = /\.(HTML|CSS|JS|ICO)/i;
+        if (reg.test(pathname)) {
+            try {
+                let con = fs.readFileSync('.' + pathname, 'utf8');
+                res.end(con);
+            } catch (error) {
+                res.end('FILE IS NOT FIND');
+        }
+    }
     var file = fs.readFileSync('data.json');
     var obj = {};
     var data = JSON.parse(file);
@@ -105,7 +115,7 @@ const server = http.createServer((req, res) => {
                     writeFile(data);
                 })
                 obj.code = 200;
-                obj.data = data;
+                obj.message = '修改成功';
                 break;
             default: 
                 break;
