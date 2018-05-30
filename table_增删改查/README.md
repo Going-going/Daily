@@ -78,3 +78,12 @@
     message: '修改成功'
 }
 ```
+
+【mock文件夹】
+
+> 运行
+
+    node server.js
+> 访问静态文件
+
+    http://xx.xxx.xx/page/index.html

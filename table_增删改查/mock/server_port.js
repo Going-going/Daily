@@ -3,7 +3,7 @@ const fs = require('fs')
 const url = require('url')
 const querystring = require('querystring')
 const data = require('./data.js')
-const port = '9000'
+const port = '9001'
 
 function writeFile(data) {
     fs.writeFile('data.json', JSON.stringify(data), (err) =>{
@@ -14,13 +14,25 @@ function writeFile(data) {
 
 
 const server = http.createServer((req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "Cache-Control,Content-Type,Hash-Referer,X-Requested-With");
-	res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-	res.setHeader("X-Powered-By",' 3.2.1');
-	res.setHeader('Content-type', 'application/json;charset=utf8');
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.setHeader("Access-Control-Allow-Headers", "Cache-Control,Content-Type,Hash-Referer,X-Requested-With");
+	// res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+	// res.setHeader("X-Powered-By",' 3.2.1');
+	// res.setHeader('Content-type', 'application/json;charset=utf8');
 
     var {pathname, query} = url.parse(req.url, true);
+    // 静态资源文件处理
+    // console.log(pathname)
+    let reg = /\.(HTML|CSS|JS|ICO)$/i;
+        if (reg.test(pathname)) {
+            // res.writeHead(200,{'Content-Type':'text/html'});
+            try {
+                let con = fs.readFileSync('./' + pathname, 'utf8');
+                res.end(con);
+            } catch (error) {
+                res.end('FILE IS NOT FIND');
+        }
+    }
     var file = fs.readFileSync('data.json');
     var obj = {};
     var data = JSON.parse(file);
@@ -39,10 +51,14 @@ const server = http.createServer((req, res) => {
                     obj.code = 200;
                     obj.data = data;
                 }
+                res.setHeader('Content-type', 'application/json;charset=utf8');
+                res.end(JSON.stringify(obj))
                 break;
             default: 
                 break;
         }
+        
+        // return true;
     }
 
     if(pathname == '/addItem'){
@@ -65,6 +81,8 @@ const server = http.createServer((req, res) => {
             default: 
                 break;
         }
+        res.setHeader('Content-type', 'application/json;charset=utf8');
+    res.end(JSON.stringify(obj))
     }
 
     if(pathname == '/delectItem'){
@@ -85,6 +103,8 @@ const server = http.createServer((req, res) => {
             default: 
                 break;
         }
+        res.setHeader('Content-type', 'application/json;charset=utf8');
+    res.end(JSON.stringify(obj))
     }
 
     if(pathname == '/changeItem'){
@@ -110,8 +130,10 @@ const server = http.createServer((req, res) => {
             default: 
                 break;
         }
-    }
+        res.setHeader('Content-type', 'application/json;charset=utf8');
     res.end(JSON.stringify(obj))
+    }
+    
     
 })
 
