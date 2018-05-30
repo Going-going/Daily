@@ -12,8 +12,9 @@ $(function() {
                 dataType: 'json',
                 data: params,
                 success: function (res) {  
-                    console.log(res);
                     if(res.code == 200){
+                        console.log(res);
+                        $('#myModal').modal('hide')
                         events.init();
                     }
                 },
@@ -59,7 +60,6 @@ $(function() {
                     id: id
                 },
                 success: function(res) {
-                    console.log(res)
                     events.init();
                 },
                 error: function(err) {
@@ -68,16 +68,15 @@ $(function() {
             })
         },
         changeItem: function(params) {
-            console.log(params);
             $.ajax({
                 url: 'http://127.0.0.1:9000/changeItem',
                 method: 'post',
                 dataType: 'json',
                 data: params,
                 success: function (res) {  
-                    console.log(res);
                     if(res.code == 200){
-                        // events.init();
+                        $('#myModal1').modal('hide')
+                        events.init();
                     }
                 },
                 error: function (data) {  
@@ -105,15 +104,16 @@ $(function() {
     }
     events.init();
 
-
+    // 添加
     $('#myModal').find('.submit').click(function(params) {
         events.addInfo($('#addform').serialize());
     })
+    // 删除
     $('tbody').on('click', '.btn-danger', function() {
         var id = $(this).attr('delete-id');
         events.deleteInfo(id)
     })
-
+    // 修改赋值
     $('tbody').on('click', '.btn-success', function() {
         var id = $(this).attr('change-id');
         var item = events.getItem(id)[0];
