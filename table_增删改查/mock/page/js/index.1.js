@@ -1,3 +1,95 @@
+var Public = (function() {
+    // 增加
+    function addInfo(params) {
+        console.log(params)
+            $.ajax({
+                url: '/addItem',
+                method: 'post',
+                dataType: 'json',
+                data: params,
+                success: function (res) {
+                    if (res.code == 200) {
+                        console.log(res);
+                        $('#myModal').modal('hide')
+                        events.init();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+    }
+    // 删除
+    function deleteInfo(id) {
+        $.ajax({
+            url: '/delectItem',
+            method: 'get',
+            dataType: 'json',
+            data: {
+                id: id
+            },
+            success: function (res) {
+                events.init();
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+    // 修改
+    function changeItem(params) {
+        $.ajax({
+            url: '/changeItem',
+            method: 'post',
+            dataType: 'json',
+            data: params,
+            success: function (res) {
+                if (res.code == 200) {
+                    $('#myModal1').modal('hide');
+                    events.init();
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+    }
+    // 查询
+    function bindHTML(param) {
+        var param = param || {};
+        $.ajax({
+            url: '/getItem',
+            method: 'get',
+            dataType: 'json', 
+            data: {
+                id: param.id,
+                curpage: param.curpage,
+                pagesize: param.pagesize
+            },
+            async: false,
+            success: function (res) {
+                count = res.counts;
+                var html = '';
+                var data = res.data ? res.data : [];
+                data.forEach((item, key) => {
+                    html += `<tr>
+                                <td>${item.id}</td>
+                                <td>${item.name}</td>
+                                <td>${item.sexy}</td>
+                                <td>${item.tel}</td>
+                                <td>${item.address}</td>
+                                <td>
+                                    <button class='btn btn-success' data-toggle="modal" data-target="#myModal1" change-id="${item.id}">修改</button>
+                                    <button class="btn btn-danger" delete-id="${item.id}">删除</button>
+                                </td>
+                            </tr>`
+                })
+                $('tbody').html(html || '<div class="nodata">暂无更多数据~</div>');
+            }
+        })
+    }
+})()
+
 $(function () {
 
     var i = 0;
@@ -54,7 +146,6 @@ $(function () {
             })
         },
         getData: function (param) {
-            i++;
             var param = param || {};
             $.ajax({
                 url: '/getItem',
