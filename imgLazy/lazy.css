@@ -1,14 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
+img{
+	border: 0;
+	background: none;
 }
-#lazy-wrap {
-  width: 76.5%;
-  height: auto;
-  margin: 0 auto;
-  font-size: 0;
-}
-#lazy-wrap .lazy-img {
+.lazy-img {
   width: 120px;
   height: 178px;
   position: relative;
@@ -17,7 +11,7 @@
   margin-right: 8px;
   margin-top: 5px;
 }
-#lazy-wrap .lazy-img img {
+ .lazy-img img {
   width: 100%;
   height: 100%;
   position: absolute;
