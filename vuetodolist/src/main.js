@@ -18,7 +18,7 @@ Vue.use(VueAwesomeSwiper)
 Vue.use(VueLazyLoad, {
   preLoad: 1,
   error: '/static/error.jpg',
-  loading: '/static/loading.gif'
+  loading: '/static/default.gif'
 })
 
 Vue.component(NavBar.name, NavBar);

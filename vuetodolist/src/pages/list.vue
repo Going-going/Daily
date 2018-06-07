@@ -4,7 +4,7 @@
         <div class="content" @scroll="handleScroll">
             <ul class="datalist">
                 <li v-for="(item, key) in items" :key="key">
-                    <img :src="item.bookCover" alt="">
+                    <img v-lazy="item.bookCover" alt="">
                     <div>
                       <p v-html="item.bookName"></p>
                       <p class="price">￥{{item.bookPrice}}元</p>
@@ -31,7 +31,7 @@ export default {
           //   pagesize: 10
           // },
           params: {
-            offset: 20,
+            offset: 0,
             // currpage: 1,
             pagesize: 10
           },
