@@ -35,9 +35,7 @@
 		}
 		return style[css];
 	}
-	// console.log(getStyle($('#lazy-wrap'), 'height'))  // 6222px
 
-	console.log(defaultParam)
 	function setDom(defaultParam) {
 		var str = '';
 		defaultParam.data.forEach(function(item, index) {
@@ -65,6 +63,7 @@
 								wrapBox[index].innerHTML = '';
 								wrapBox[index].appendChild(img);
 								wrapBox[index].style.animation = 'fadeIn 2s ease';
+								img = null;  // 释放对象
 							}, 500)
 						}
 					}
