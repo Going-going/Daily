@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, mininum-scale=1, maxinum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/mescroll/mescroll.min.css">
+    <title>mescroll && lazyload</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        img{width: 100%;height: 100%;}
+        dl{display: flex;border-bottom: 1px solid #e4e4e4;padding: 5px;}
+        dt{width: 100px;height: 100px;}
+        dd{flex: 1;}
+        p{line-height: 32px}
+    </style>
+</head>
+<body>
+    <div class="m-scroll-wrapper mescroll" id="mescroll">
+        <div id="datalist">
+
+        </div>
+    </div>
+</body>
+<script src="lib/jquery/jquery-3.2.1.min.js"></script>
+<script src="lib/jquery_lazyload/jquery.lazyload.min.js"></script>
+<script src="lib/mescroll/mescroll.min.js"></script>
+<script src="index.js"></script>
+</html>
