@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+    <a href="####" class="aaa"></a>
+</body>
+<script>
+    // console.log(num)
+    // console.log(fn)
+    // if(1 === 1){
+    //     console.log(fn)
+    //     var num = 12;
+    //     function fn() {}
+    //     console.log(fn)
+    // }
+    // console.log(typeof null)
+
+    // var obj1 = new Object();
+    // var obj2 = obj1;
+    // obj2.name = '你好';
+    // console.log(obj1.name)
+
+    // var arr1 = [1,2,3,4,5]
+    // var arr2 = arr1;
+    // arr2[2] = 9;
+    // console.log(arr1);
+//     console.log(f1());   // 
+// console.log(f2);    
+// function f1() {
+//     console.log('aa')  
+// } 
+// var f2 = function() {} 
+
+// (function() {
+// 　　console.log(a);  //undefined
+// 　　a = 'aaa';
+// 　　var a = 'bbb';
+// 　　console.log(a);  // bb
+// })(window)
+
+// console.log(foo)  // fn
+// var foo = 1;
+// console.log(foo)  // 1
+// function foo() {
+//     console.log('aaa')
+// }
+// console.log(foo)   // 1
+
+// var x = 10, y = 20, z= 30;
+// function fn(params, o) {
+//     console.log(arguments);  // [10,20,30]
+//     var x = 100;
+//     y = 200;   // 修改的arguments里的参数 私有作用域
+//     z = 300;
+//     console.log(arguments); // [100,200,300]
+//     console.log(x, y, z)    // 100,200,300
+// }
+// fn({name: x, age: y}, [x,y,z]) 
+// console.log(x, y, z)  // 10,20,300
+
+// 4
+// 4
+// 4
+// fn is not a function
+// function fn() {
+//     console.log(1)
+// }
+// function fn() {
+//     console.log(2)
+// }
+// function fn() {
+//     console.log(3)
+// }
+// function fn() {
+//     console.log(4)
+// }
+// fn() //4
+// fn() //4
+// fn() //4
+// var fn = 13;
+// fn() //fn is not a function
+// fn() //不执行
+// fn() //不执行
+
+// const params = {color: 'red', minPrice: 8000, maxPrice: 10000};
+// console.log(Object.keys(params))  //  ["color", "minPrice", "maxPrice"]
+// console.log(Object.values(params))  // ["red", 8000, 10000]
+// const query = '?' + Object.keys(params).map(k =>
+//    encodeURIComponent(k) + '=' + encodeURIComponent(params[k])
+//  ).join('&');
+// console.log(query)  //?color=red&minPrice=8000&maxPrice=10000
+
+// console.log(num)  // undefined
+// console.log(fn) // undefined
+// if(1 === 1){
+//     console.log(fn) // ƒ fn() {}
+//     var num = 12;
+//     function fn() {} 
+//     console.log(fn) // ƒ fn() {}
+// }
+// console.log(fn) // ƒ fn() {}
+// console.log(bb);
+// // console.log(a)
+// function bb() {
+//     console.log(1)
+// }
+// console.log(bb) 
+
+// // =>
+// function bb() {
+//     console.log(1)
+// }
+// console.log(bb);
+// console.log(bb)
+
+// function a() {
+//     var num = 1;
+//     function b() {
+//         num++;
+//         console.log(num);
+//     }
+//     return b;
+// }
+// var c = a();
+// c();    //2
+// c();    //3
+
+// function createFunctions(){
+//     var result = new Array();
+//     for (var i=0; i < 10; i++){
+//         (function(index) {
+//             result[index] = function(){
+//                 return index;
+//             };
+//         })(i)
+//     }
+//     return result;
+// }
+// var funcs = createFunctions();
+// for (var i=0; i < funcs.length; i++){
+//     console.log(funcs[i]());
+// }
+
+// var name = "The Window";
+
+// 　　var object = {
+// 　　　　name : "My Object",
+
+// 　　　　getNameFunc : (function(){
+//             // console.log(this);
+// 　　　　　　return function(){
+//                 console.log(this.name);
+//                 console.log(name)
+// 　　　　　　　　return this.name;
+// 　　　　　　};
+
+// 　　　　})(name)
+
+// 　　};
+//     var a = object.getNameFunc();
+// // 　　alert(object.getNameFunc()());
+// a();
+// var arr = [1,2,3,4,5,6,7,8,9,0]
+// for(var i in arr){
+//     !function(index){
+//         setTimeout(function() {
+//             document.write(arr[index])  // 1234567890
+//         }, index * 1000)
+//     }(i)
+// }
+
+// alert(a)
+// var a = 10;
+// alert(a)
+// function a() {
+//     alert(20)
+// }
+// alert(a)
+// var a = 30
+// function a(){
+//     alert(40)
+// }
+// alert(a)
+// var a = 10;
+// alert(a);
+// a();
+// function a() {
+//     alert(20);
+// }
+// var a = 5;
+// function fn(){
+//     var a = 10;
+//     console.log("1:"+a);
+
+//     function b() {
+//         a++;
+//         console.log("2:"+a);
+//     }
+//     return b;
+// }
+// var c = fn();
+// c(); // 10 11
+// // console.log(fn()())
+
+// fn()();
+// // => 
+// var d = fn();
+// d();
+
+// c();
+// fn();
+// alert(a);
+// var a = 10;
+// alert(a);
+// function fn(){
+//     console.log(a)
+// }
+
+// (function(n){
+//     console.log(n);
+//     return function(){
+//         alert(1);
+//     }
+// })(123456)
+// a();
+
+// var num = 20;
+// var obj = {
+//     num: 30,
+//     fn: (function(num) {
+//         this.num *= 3;
+//         console.log(this.num)
+//         num += 15;
+//         console.log(num)
+//         var num = 45;
+//         return function() {
+//             this.num *= 4;
+//             num += 20;
+//             console.log(this.num)
+//             console.log(num)
+//         }
+//     })(num)
+// }
+// var fn = obj.fn;
+// fn();
+// obj.fn();
+// console.log(window.num,obj.num)
+// (function() {
+// // 　　console.log(a);
+// 　　a = 'aaa';
+// 　　var a = 'bbb';
+// // 　　console.log(a);
+// })();
+
+// console.log(f1()); 
+// console.log(f2);   
+// function f1() {console.log('aa')}
+// var f2 = function() {}
+// console.log(num)  // undefined
+// console.log(fn)   //
+// if(1 === 1){
+//     console.log(fn)   // function fn() {}
+//     var num = 12;
+    
+//     function fn() {console.log(1)}
+//     console.log(fn())   // function fn() {}
+// }
+// console.log(fn)   // function fn() {}
+
+//  var num, fn;
+//     console.log(num)  // undefined
+//     console.log(fn)   // 新版浏览器：undefined  旧版浏览器：function fn() {}
+//     if(1 === 1){
+//         fn = function fn() {console.log(1)}
+        
+//         console.log(fn())   // function fn() {}
+//         num = 12;
+        
+//         console.log(fn)   // function fn() {}
+//     }
+//     console.log(fn())   // function fn() {}
+
+
+// var n = 10;
+// var obj = {
+//     n: 20,
+//     fn: (function(){
+//         var n = 30;
+//         return function() {
+//             console.log(n)
+//         }
+//     })()
+// }
+// var a = new obj.fn;
+// var b = new obj.fn;
+// console.log(a === b)
+// // a();  // 30
+
+// function A(){
+    
+// }
+// var aa = new A()
+// var bb = new A();
+// console.log(aa == bb)
+
+// fn()();
+// var a = 0;
+// function fn() {
+//     alert(a)
+//     var a = 3;
+//     function c() {
+//         alert(a);
+//     }
+//     return c;   
+// }
+
+// function fn() {
+//      var a;
+//      function b() {
+//          a++;
+//          alert(a)
+//      }
+//      a = 10;
+//      alert(a);
+//      return b;
+//  }
+//  var a, c;
+//  a = 5;
+//  c = fn();  
+//  c(); // 10 11
+//  fn()(); //10 11
+//  c(); // 12
+
+// function fn(a) {
+//     if(a < 10){
+//         alert(10);
+//         return;
+//     }
+
+//     if(a < 20){
+//         alert(20);
+//         return ;
+//     }
+// }
+// fn(5)  //10
+// var a;
+// function f() {
+//     alert(2);
+// }
+// alert(a);
+// f();
+// a = 10;
+// alert(a);
+// var a;
+// function fn() {
+//     var a;
+//     alert(a)
+//     a = 1;
+//     alert(a);
+// }
+// a = 10;
+// fn();
+// alert(a)
+// var a = 10;
+// alert(a);  //10
+// a(); // a is not a function
+// function a() {
+//     alert(20)
+// }
+
+// function a() {  //<=函数提升
+//     alert(20)
+// }
+// function a() {
+//     alert(40)
+// }
+// var a; //<=变量提升
+// alert(a)  //function() {alert(40)}
+// a = 10;
+// alert(a); // 10
+// a = 30;
+// alert(a) // 30
+// alert(a);// 30
+
+// function a() {
+//     alert(1)
+// }
+// var a;
+// alert(a); // function
+
+// function a() {
+//     alert(x);
+//     var x = 10;
+// }
+// a();    //undefined
+// alert(x)  // x is not defined
+</script>
+</html>

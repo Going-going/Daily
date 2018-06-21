@@ -102,6 +102,16 @@ export default {
 </script>
 
 <style scoped>
+img[lazy=loading]{
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 .content{
 position: relative;
 }
@@ -120,6 +130,7 @@ li{
     display: inline-block;
     padding: 8px;
   border-bottom:1px solid #e4e4e4;
+  position: relative;
 }
 li:nth-of-type(2n-1){
   border-right:1px solid #e4e4e4;

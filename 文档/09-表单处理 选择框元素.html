@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09-表单处理 选择框元素</title>
+</head>
+<body>
+
+    <!--
+        选择框元素
+            是通过select和option创建的
+
+            HtmlSelectElement的属性和方法
+                    add(new,rel)----插入新元素并指定位置
+                    multiple--------是否允许多项选择
+                    remove(index)---移除指定位置的选项
+                    selectedIndex---基于0的选中项的索引,没有即为-1
+                    size------------选择框中可见的行数
+
+            HtmlOptionElement的属性和方法
+                    index-----------当前选项在options集合中的索引    label---当前选项的标签
+                    selected--------判断当前选项是否被选中   text---选项的文本 value---值
+    -->
+    <form action="" id="myForm">
+        <select name="city">
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+            <option value="shenzhen">深圳</option>
+            <option value="chongqing">重庆</option>
+        </select>
+    </form>
+    <script>
+
+        var oMyForm=document.getElementById("myForm");
+        var sel=oMyForm.elements['city'];
+        console.log(sel);
+        //sel.multiple=true;
+        //sel.size=3;
+        console.log(sel.type);//单选
+        console.log(sel.options);//选项的集合
+        console.log(sel.options.length);//选项个数
+        console.log(sel.options[0]);//第一个选项
+        console.log(sel.options[0].value);
+        console.log(sel.options[0].text);//value和text是html DOM提供的方式
+
+        //使用标准的DOM方式获取选项的value text----这种形式的兼容性不好
+        console.log(sel.options[0].getAttribute('value')+"----"+sel.options[0].firstChild.nodeValue);
+
+
+        addEvent(sel,'change',function(){
+            console.log(this.selectedIndex);
+            console.log(sel.options[this.selectedIndex].value);
+
+            if(sel.options[2].selected){
+                //alert(1);
+            }
+
+        });
+
+        //设置被选中的选项
+        //sel.selectedIndex=2;
+
+        //添加选项
+            //1.使用DOM实现
+            var option=document.createElement("option");
+            var textNode=document.createTextNode("青岛");
+            option.appendChild(textNode);
+            option.setAttribute('value','qd');
+            sel.appendChild(option);
+
+            //2.使用select方法
+            var option2=new Option('大连','dalian');
+            //sel.appendChild(option2);//存在浏览器的兼容性问题,IE8及以下不支持
+            sel.add(option2,2);
+
+        //删除选项
+            //1.使用DOM
+            //sel.removeChild(sel.options[0]);
+
+            //2.使用select方法
+            //sel.remove(0);
+
+            //3.滞空
+            //sel.options[0]=null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //跨浏览器添加事件方法
+        function addEvent(obj,evt,fn){
+            if(obj.addEventListener){
+                obj.addEventListener(evt,fn,false);
+            }else if(obj.attachEvent){
+                obj.attachEvent('on'+evt,fn);
+                fn.call(obj);
+            }
+        }
+        //跨浏览器删除事件方法
+        function delEvent(obj,evt,fn){
+            if(obj.removeEventListener()){
+                obj.removeEventListener(evt,fn,false);
+            }else if(obj.detachEvent()){
+                obj.detachEvent('on'+evt,fn);
+            }
+        }
+        //跨浏览器后去除目标对象
+        function getTarget(evt){
+            if(evt.target){
+                return evt.target;
+            }else if(window.event.srcElement){
+                return window.event.srcElement;
+            }
+        }
+
+        //跨浏览器获取字符编码
+        function getChartCode(evt){
+            var e=evt||window.event;
+            if(typeof e.charCode=='number'){
+                return e.charCode;
+            }else{
+                return e.keyCode;
+            }
+        }
+    </script>
+</body>
+</html>
