@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>百度AI</title>
+</head>
+<body>
+    <img width="300" height="200" src="" alt="">
+    <input type="file" accept="image/*" capture="camera" name="file" accept=".gif,.jpg,.jpeg,.png" />
+    <button>提交</button>
+</body>
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+    $(function () {  
+        $('input[type=file]').on('change', function() {
+            readURL(this)
+        })
+        function readURL(input) {
+            var xmlhttp;
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.readAsDataURL(input.files[0]);
+                reader.onload = (e) => {
+                    var imgBase64 = reader.result;
+                    document.getElementsByTagName('img')[0].setAttribute('src', imgBase64);
+
+                    if(window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest()
+                    }else{
+                        xmlhttp = new ActiveXObject('Microsoft XMLHTTP');
+                    }
+                    xmlhttp.open('post', '/vatInvoice', false);
+                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    // post提交 +号变成了空格 导致数据错误 encode一下
+                    xmlhttp.send("img=" + encodeURIComponent(imgBase64.split(',')[1]) + "&id=1");
+                    console.log(xmlhttp);
+                    xmlhttp.onreadystatechange = function() {
+                        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                        }
+                    }
+                    $.ajax({
+                        url: '/vatInvoice',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            img: imgBase64.split(',')[1]
+                        },
+                        success: function(res) {
+                            console.log(res);
+                        },
+                        error: function(err) {
+                            console.log(err)
+                        }
+                    })
+                }
+            }
+        }
+    //     function readURL(input) {
+    //     if (input.files && input.files[0]) {
+    //         const reader = new FileReader();
+    //         console.log(reader)
+    //         reader.readAsDataURL(input.files[0]);
+    //         reader.onload = (e) => {
+    //             var img = e.target.result;
+    //             $.ajax({
+    //                 url: 'https://aip.baidubce.com/rest/2.0/ocr/v1/vat_invoice',
+    //                 type: 'post',
+    //                 contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+    //                 data: {
+    //                     access_token: '24.e1cad765bfa9aac3cdf4c02cb93f6f05.2592000.1530670674.282335-11321255',
+    //                     image: img
+    //                 },
+    //                 dataType: 'jsonp',
+    //                 success: function (res) {
+    //                     if (res) {
+    //                         $('#loading').hide();
+    //                         var result = a;
+    //                         console.log(JSON.stringify(result))
+    //                         window.location.href = 'edit.html?message=' + JSON.stringify(result);
+
+    //                     }
+    //                 },
+    //                 error: function (err) {
+    //                     console.log(JSON.stringify(err));
+    //                     $('#loading').hide();
+    //                 }
+    //             })
+    //         };
+    //     }
+    // }
+    })
+</script>
+</html>
