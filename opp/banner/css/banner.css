@@ -298,7 +298,7 @@ button:-moz-focusring,
 }
 
 .container .arrow {
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	top: 50%;
 	z-index: 999;
