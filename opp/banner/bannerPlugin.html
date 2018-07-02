@@ -11,21 +11,21 @@
 <body>
     <div class="container" id="con1">
         <ul class="wrapper">
-            <li class="slide">
+            <li class="slide active">
                 <img src="" data-img="img/banner1.jpg" alt="">
             </li>
             <li class="slide">
                     <img src="" data-img="img/banner1.jpg" alt="">
                 </li>
         </ul>
-        <ul class="focusBox clearfix">
+        <!-- <ul class="focusBox clearfix"> -->
             <!-- <li class="select"></li>
             <li></li>
             <li></li>
             <li class="last"></li> -->
-        </ul>
-        <a href="javascript:;" class="arrow arrowLeft"></a>
-        <a href="javascript:;" class="arrow arrowRight"></a>
+        <!-- </ul> -->
+        <!-- <a href="javascript:;" class="arrow arrowLeft"></a>
+        <a href="javascript:;" class="arrow arrowRight"></a> -->
     </div>
 
     <div class="container" id="con2">
@@ -34,9 +34,6 @@
             <img src="" data-img="img/banner1.jpg" alt="">
         </li>-->
         </ul>
-        <ul class="focusBox clearfix"></ul>
-        <a href="javascript:;" class="arrow arrowLeft"></a>
-        <a href="javascript:;" class="arrow arrowRight"></a>
     </div>
 
     <!--IMPORT JS-->
@@ -49,12 +46,11 @@
             plagination: true,
             autoPlay: true
         });
-        // $("#con2").pluginBanner({
-        //     url: 'js/banner.json',
-        //     autoInterval: 3000,
-        //     needFocus: true,
-        //     needArrow: true
-        // });
+        $("#con2").myswiper({
+            url: '../banner.json',
+            plagination: true,
+            autoPlay: true
+        });
     </script>
 </body>
 
