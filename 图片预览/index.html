@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="public.css">
+    <title>图片预览</title>
+    <style>
+        .model{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+        }
+        .model .model-box img{
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+        .model .close{
+            background: none;
+            border: 0;
+            position: absolute;
+            right: 5%;
+            top: 10%;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+        }
+        .model .close:hover{
+            color: #e4e4e4;
+        }
+        .model.in .model-box{
+            width: 75%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+            transform: translate(0,0);
+        }
+        .model.out .model-box{
+            width: 75%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+            transform: translate(0,-50%);
+            transition: transform .3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <img width="150" height="150" src="1.png" alt="">
+    <div>
+            <img width="150" height="150" src="2.png" alt="">
+    </div>
+    <div class="model out">
+        <div class="model-box">
+            <img src="1.png" alt="">
+        </div>
+        <button class="close">X</button>
+    </div>
+</body>
+<script>
+    var oModel = document.getElementsByClassName('model')[0];
+    var oClose = oModel.getElementsByClassName('close')[0];
+    oClose.onclick = function() {
+        oModel.style.display = 'none';
+    }
+    document.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if(e.target.tagName == 'IMG' && e.target.src){
+            // console.log(e.target.tagName);
+            showModel(e.target.src)
+        }
+    })
+    function showModel (src){
+        oModel.style.display = 'block';
+        oModel.getElementsByTagName('img')[0].src = src;
+    }
+
+    var imgPreview = (function() {
+        
+    })()
+</script>
+</html>
