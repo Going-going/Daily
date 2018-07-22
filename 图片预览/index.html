@@ -8,14 +8,19 @@
     <link rel="stylesheet" href="public.css">
     <title>图片预览</title>
     <style>
+        /* 样式start */
         .model{
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.7);
             display: none;
+        }
+        .model.fadeIn{
+            display: block;
+            animation: fade-in 1s;
         }
         .model .model-box img{
             max-width: 100%;
@@ -46,50 +51,59 @@
             height: 100%;
             margin: 0 auto;
             position: relative;
-            transform: translate(0,0);
+
         }
-        .model.out .model-box{
-            width: 75%;
-            height: 100%;
-            margin: 0 auto;
-            position: relative;
-            transform: translate(0,-50%);
-            transition: transform .3s ease-out;
+        @keyframes fade-in {
+            0%{
+                opacity:0;
+            }
+            100%{
+                opacity:1;
+
+            }
         }
+        /* 样式END */
     </style>
 </head>
 <body>
     <img width="150" height="150" src="1.png" alt="">
     <div>
-            <img width="150" height="150" src="2.png" alt="">
-    </div>
-    <div class="model out">
-        <div class="model-box">
-            <img src="1.png" alt="">
-        </div>
-        <button class="close">X</button>
+        <img width="150" height="150" src="2.png" alt="">
     </div>
 </body>
 <script>
-    var oModel = document.getElementsByClassName('model')[0];
-    var oClose = oModel.getElementsByClassName('close')[0];
-    oClose.onclick = function() {
-        oModel.style.display = 'none';
-    }
-    document.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if(e.target.tagName == 'IMG' && e.target.src){
-            // console.log(e.target.tagName);
-            showModel(e.target.src)
-        }
-    })
-    function showModel (src){
-        oModel.style.display = 'block';
-        oModel.getElementsByTagName('img')[0].src = src;
-    }
+
+
 
     var imgPreview = (function() {
-        
+        var container = document.createElement('div');
+        container.className = 'model';
+        var str = '<div class="model-box">'
+                + '<img src="1.png" alt=""></div>'
+                + '<button class="close">X</button>';
+        container.innerHTML = str;
+        document.body.appendChild(container);
+        var oModel = document.getElementsByClassName('model')[0];
+        var oClose = oModel.getElementsByClassName('close')[0];
+        function bindEvent(){
+            oClose.onclick = function() {
+                oModel.classList.remove('fadeIn');
+            }
+            document.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if(e.target.tagName == 'IMG' && e.target.src){
+                    showModel(e.target.src)
+                }
+            })
+        }
+        function showModel (src){
+            oModel.classList.add('fadeIn');
+            oModel.getElementsByTagName('img')[0].src = src;
+        }
+        return {
+            init: bindEvent
+        }
     })()
+    imgPreview.init();
 </script>
 </html>
