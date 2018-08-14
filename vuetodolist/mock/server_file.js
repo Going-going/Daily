@@ -2,7 +2,7 @@
  * @Author: zhaoyangyue 
  * @Date: 2018-05-22 15:10:34 
  * @Last Modified by: zhaoyangyue
- * @Last Modified time: 2018-05-23 16:10:44
+ * @Last Modified time: 2018-08-06 12:59:54
  */
 const http = require('http')
 const url = require('url')
@@ -89,7 +89,14 @@ http.createServer((request, response) => { //输出文件为json格式
 						console.log(query)
 						if(query.pagesize) pagesize = query.pagesize;
 						if(query.offset) offset = query.offset;
-						var newData =  data.slice(offset)
+						var newData =  data.slice(offset);
+						if(query.activeIndex == 1){
+							response.end(JSON.stringify({
+								data: [],
+								currpage: 1,
+								hasmore: false
+							}))
+						}
 						if(query.currpage){
 							var currpage = query.currpage;
 							if(newData.length % pagesize != 0){
@@ -97,6 +104,7 @@ http.createServer((request, response) => { //输出文件为json格式
 							}else{
 								var totalpage = parseInt(newData.length / pagesize);
 							}
+							returnData.hasmore = query.currpage == totalpage ? false : true; 
 							returnData.totalpage = totalpage;
 							returnData.currpage = currpage;
 							returnData.data = newData.splice((currpage - 1) * pagesize, pagesize);

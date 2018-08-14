@@ -76,5 +76,21 @@ console.log([...arrayLike]) //[1, 2, 3]
 
 
 let map = new Map([
-    
-])
+    [1, 'one'],
+    [2, 'two'],
+    [3, 'three']
+]) 
+// let go = function*(){
+//     yield 1;
+//     yield 2;
+//     yield 3;
+// }
+
+// console.log([...go()])
+console.log([...map.keys()]); //[1, 2, 3]   
+console.log([...map.values()]); //["one", "two", "three"]
+
+
+let concat1 = ["a", "b", "c"];
+let concat2 = [1,2,3]
+console.log([...concat1, ...concat2]); //["a", "b", "c", 1, 2, 3]

@@ -98,4 +98,18 @@ var arrayLike = {
 console.log([].concat(_toConsumableArray(arrayLike))); //[1, 2, 3]
 
 
-var map = new Map([]);
+var map = new Map([[1, 'one'], [2, 'two'], [3, 'three']]);
+// let go = function*(){
+//     yield 1;
+//     yield 2;
+//     yield 3;
+// }
+
+// console.log([...go()])
+console.log([].concat(_toConsumableArray(map.keys()))); //[1, 2, 3]   
+console.log([].concat(_toConsumableArray(map.values()))); //["one", "two", "three"]
+
+
+var concat1 = ["a", "b", "c"];
+var concat2 = [1, 2, 3];
+console.log([].concat(concat1, concat2)); //["a", "b", "c", 1, 2, 3]

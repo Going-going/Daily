@@ -19,7 +19,28 @@
         console.log(this.name);
     }
     var p1 = new Person('zhaoyangyue');
-    console.log(p1.__proto__.constructor == p1.constructor)  //true
-    console.log(p1.constructor) //Person(){}
+    var f1 = new Function();
+    // console.log(p1.__proto__.constructor == p1.constructor)  //true
+    // console.log(p1.constructor) //Person(){}
+
+    // console.log(Person.prototype == p1.__proto__)
+    // console.log(typeof Person.prototype) //object
+    // console.log(Function.prototype == f1.prototype) //function 特殊情况
+
+
+    var p2 = new Person('zyy');
+    var f2 = new Function();
+
+    //构造函数的实例是一个对象
+    console.log(typeof p2); //object
+    console.log(typeof f2); //function
+    // console.log(Person.prototype);   //Person.prototype对象{showName: ƒ, constructor: ƒ}
+    // console.log(Function.prototype); //ƒ () { [native code] }
+    console.log(typeof Person.prototype); //object
+    console.log(typeof Function.prototype); //function 特殊
+    console.log(typeof Object.prototype); //object
+
+
+    // console.log(Object.prototype.prototype) //undefined
 </script>
 </html>

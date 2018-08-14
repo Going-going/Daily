@@ -8,14 +8,29 @@
     <title>mescroll && lazyload</title>
     <style>
         *{margin: 0;padding: 0;}
+        header{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            background: red;
+            z-index: 123;
+        }
         img{width: 100%;height: 100%;}
         dl{display: flex;border-bottom: 1px solid #e4e4e4;padding: 5px;}
         dt{width: 100px;height: 100px;}
         dd{flex: 1;}
         p{line-height: 32px}
+        .m-scroll-wrapper{
+            padding-top: 66px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        12423
+    </header>
     <div class="m-scroll-wrapper mescroll" id="mescroll">
         <div id="datalist">
 

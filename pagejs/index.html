@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Page.js</title>
+</head>
+
+<body>
+    <div id="list">
+
+    </div>
+</body>
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/page.js"></script>
+<script>
+    var totalPage = null;
+    $.ajax({
+        url: 'http://test.hisunflower.com/mobile/index.php?act=service_goods&op=goods_list',
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            gc_id: 10,
+            currpage: 1,
+            page: 10,
+            area_id: 224
+        },
+        success: function (res) {
+            if (res.code == 200) {
+                console.log(res);
+                totalPage = res.page_total;
+                $('#list').createPage({
+                    current: 1,
+                    pageCount: totalPage,
+                    backFn: function () {
+                        console.log(1)
+                    }
+                })
+            }
+        }
+    })
+
+</script>
+
+</html>
