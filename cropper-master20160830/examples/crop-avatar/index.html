@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A complete example of Cropper.">
+  <meta name="keywords" content="HTML, CSS, JS, JavaScript, jQuery, PHP, image cropping, web development">
+  <meta name="author" content="Fengyuan Chen">
+  <title>Crop Avatar - Cropper</title>
+  <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../dist/cropper.min.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container" id="crop-avatar">
+    <div class="img-preview"></div>
+    <!-- Cropping modal -->
+    <div class="" id="avatar-modal">
+      <div class="">
+        <div class="">
+          <form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
+            <div class="modal-body">
+              <div class="avatar-body">
+
+                <!-- Upload image and data -->
+                <div class="avatar-upload">
+                  <input class="avatar-src" name="avatar_src" type="hidden">
+                  <input class="avatar-data" name="avatar_data" type="hidden">
+                  <label for="avatarInput">Local upload</label>
+                  <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
+                </div>
+
+                <!-- Crop and preview -->
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="avatar-wrapper"></div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="avatar-preview preview-lg"></div>
+                    <div class="avatar-preview preview-md"></div>
+                    <div class="avatar-preview preview-sm"></div>
+                  </div>
+                </div>
+
+                <div class="row avatar-btns">
+                  <div class="col-md-9">
+                    <div class="btn-group">
+                      <button class="btn btn-primary" data-method="setDragMode" data-option="move" type="button" title="Move">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+                          <span class="icon icon-move"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="setDragMode" data-option="crop" type="button" title="Crop">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;crop&quot;)">
+                          <span class="icon icon-crop"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="zoom" data-option="0.1" type="button" title="Zoom In">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)">
+                          <span class="icon icon-zoom-in"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="zoom" data-option="-0.1" type="button" title="Zoom Out">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, -0.1)">
+                          <span class="icon icon-zoom-out"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button" title="Rotate Left">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, -45)">
+                          <span class="icon icon-rotate-left"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="rotate" data-option="45" type="button" title="Rotate Right">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, 45)">
+                          <span class="icon icon-rotate-right"></span>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn btn-primary" data-method="disable" type="button" title="Disable">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;disable&quot;)">
+                          <span class="icon icon-lock"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="enable" type="button" title="Enable">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;enable&quot;)">
+                          <span class="icon icon-unlock"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="clear" type="button" title="Clear">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)">
+                          <span class="icon icon-remove"></span>
+                        </span>
+                      </button>
+                      <button class="btn btn-primary" data-method="reset" type="button" title="Reset">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;reset&quot;)">
+                          <span class="icon icon-refresh"></span>
+                        </span>
+                      </button>
+                      <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                        <input class="sr-only" id="inputImage" name="file" type="file" accept="image/*">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
+                          <span class="icon icon-upload"></span>
+                        </span>
+                      </label>
+                      <button class="btn btn-primary" data-method="destroy" type="button" title="Destroy">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;destroy&quot;)">
+                          <span class="icon icon-off"></span>
+                        </span>
+                      </button>
+
+                    </div>
+                     <div class="btn-group btn-group-crop">
+          <button class="btn btn-primary" data-method="getCroppedCanvas" type="button">
+            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)">
+              Get Cropped Canvas
+            </span>
+          </button>
+          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }" type="button">
+            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;, { &quot;width&quot;: 160, &quot;height&quot;: 90 })">
+              160 &times; 90
+            </span>
+          </button>
+          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 320, &quot;height&quot;: 180 }" type="button">
+            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;, { &quot;width&quot;: 320, &quot;height&quot;: 180 })">
+              320 &times; 180
+            </span>
+          </button>
+        </div>
+                    <div class="btn-group">
+                      <label class="btn btn-primary" data-method="setAspectRatio" data-option="1" title="Set Aspect Ratio">
+                        <input class="sr-only" id="aspestRatio3" name="aspestRatio" value="1" type="radio">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 1 / 1)">
+                          1:1
+                        </span>
+                      </label>
+                      <label class="btn btn-primary" data-method="setAspectRatio" data-option="1" title="Set Aspect Ratio">
+                        <input class="sr-only" id="aspestRatio3" name="aspestRatio" value="1" type="radio">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 1 / 1)">
+                          1:1
+                        </span>
+                      </label>
+                      <label class="btn btn-primary" data-method="setAspectRatio" data-option="0.6666666666666666" title="Set Aspect Ratio">
+                        <input class="sr-only" id="aspestRatio4" name="aspestRatio" value="0.6666666666666666" type="radio">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 2 / 3)">
+                          2:3
+                        </span>
+                      </label>
+                      <label class="btn btn-primary" data-method="setAspectRatio" data-option="NaN" title="Set Aspect Ratio">
+                        <input class="sr-only" id="aspestRatio5" name="aspestRatio" value="NaN" type="radio">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, NaN)">
+                          Free
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <button class="btn btn-primary btn-block avatar-save" type="submit">Done</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+  </div>
+
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../dist/cropper.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

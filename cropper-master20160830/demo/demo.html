@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Fengyuan Chen">
+    <title>Document</title>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../dist/cropper.css" rel="stylesheet">
+    <style>
+        img {
+            max-width: 100%;
+            /* This rule is very important, please do not ignore this! */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">上传头像</button>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div>
+                    <img id="image" src="../assets/img/picture.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../dist/cropper.js"></script>
+
+</html>
