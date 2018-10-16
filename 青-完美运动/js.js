@@ -46,7 +46,7 @@ function getStyle(obj,attr){
 }
 
 function ajax({method = 'get', url, data, success, error}){
-
+ 
 	var xhr = null;
 
 	try{
