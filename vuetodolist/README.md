@@ -1,4 +1,4 @@
-# vue
+# vue-booklist-node
 
 > A Vue.js project & node服务
 ## 启动node服务 找到mock文件夹 并在此文件夹打开终端
