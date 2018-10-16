@@ -1,24 +1,24 @@
 <template>
     <footer class="footer">
-        <div>
+        <div :class="currtab == 0 ? 'active' : ''" @click="addClass">
             <router-link to="/">
                 <i class="iconfont icon-fonts-shouye"></i>
                 <p>首页</p>
             </router-link>
         </div>
-        <div>
+        <div :class="currtab == 1 ? 'active' : ''" @click="addClass(1)">
             <router-link to="/favor">
                 <i class="iconfont icon-shoucang"></i>
                 <p>收藏</p>
             </router-link>
         </div>
-        <div>
+        <div :class="currtab == 2 ? 'active' : ''" @click="addClass(2)">
             <router-link to="/list">
             <i class="iconfont icon-icon--"></i>
             <p>列表</p>
             </router-link>
         </div>
-        <div>
+        <div :class="currtab == 3 ? 'active' : ''" @click="addClass(3)">
             <router-link to="/add">
                 <i class="iconfont icon-jiahao"></i>
                 <p>添加</p>
@@ -29,8 +29,36 @@
 
 <script>
     export default {
+        data(){
+            return {
+                currtab: 0
+            }
+        },
         created() {
-
+            var type = this.$route.name
+            switch(type) {
+                case 'favor': 
+                    this.currtab = 1;
+                    break;
+                case 'list':
+                    this.currtab = 2;
+                    break;
+                case 'add':
+                    this.currtab = 2;
+                    break;
+                default: 
+                    this.currtab = 0;
+                    break;
+            }
+        },
+        methods: {
+            addClass(t) {
+                if(t > 0){
+                    this.currtab = t;
+                }else{
+                    this.currtab = 0;
+                }
+            }
         }
     }
 </script>
@@ -50,6 +78,9 @@ a{
     font-size: .2rem;
     padding-top: .1rem;
     z-index: 10;
+}
+.active a{
+    color: orange;
 }
 .footer .iconfont{
     font-size: .5rem;

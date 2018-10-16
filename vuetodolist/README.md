@@ -14,11 +14,26 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
+# build for production with minification 打包
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 包含内容
+
+``` bash
+# 图书首页  
+index.vue
+
+# 图书列表  
+list.vue
+
+# 图书收藏  
+favor.vue
+
+# 图书添加  
+add.vue
+
+# 页面缓存keepAlive 
+# 路由动画
+```
