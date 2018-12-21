@@ -1,0 +1,460 @@
+.container.active{
+	z-index: 9;
+	display: block;
+}
+/*启动页*/
+.m-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/index_bg.png") no-repeat center center;
+  background-size: cover;
+  z-index: 3;
+  display: none;
+}
+.m-wrap .icon {
+  width: 100%;
+  /*height: 1.5rem;*/
+  text-align: center;
+  margin: 5.3rem auto 0 auto;
+  color: #fff;
+  font-size: 14px;
+}
+.m-wrap .icon img {
+  margin: 0 auto;
+}
+.m-wrap .index_loading {
+  width: 5rem;
+  height: 0.92rem;
+  text-align: center;
+  color: #fff;
+  margin: 0 auto;
+}
+.m-wrap .index_loading .process {
+  width: 100%;
+  height: 0.34rem;
+  background: url("../images/load_bg.png") no-repeat center center;
+  background-size: contain;
+  position: relative;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.m-wrap .index_loading .process img {
+  width: 5rem;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  animation: process 3s forwards ;
+}
+.m-wrap .index_loading .text img {
+  margin: 0.34rem auto;
+}
+@keyframes process {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: -50%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+/*开始测试*/
+.m-start {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/index_bg.png") no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: 100% 100%;
+  z-index: 3;
+  display: none;
+}
+
+.m-start .start_logo{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.m-start .start_logo img{
+	width: 100%;
+	height: 100%;
+}
+/*背景图旋转*/
+.m-start .img_rotate{
+	width: 7.5rem;
+	max-height: 7.5rem;
+	transform: rotate(0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	animation: myLoad 20s infinite linear;
+}
+.m-start .img_rotate img{
+	width: 100%;
+	transform: scale(2.2);
+}
+.m-start .btn {
+  position: absolute;
+  z-index: 17;
+  width: 2.84rem;
+  height: 0.78rem;
+  bottom: 0.74rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.m-start .btn input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.m-start .btn img {
+  width: 100%;
+}
+/*扫描*/
+.m-scan {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    background: url("../images/index_bg.png") no-repeat center center;
+  background-size: cover;
+  z-index: 3;
+  display: none;
+}
+.m-scan #showAvator1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  /*height: 100%;*/
+}
+.m-scan .scaning {
+  margin: 0 auto;
+  transform: rotate(0);
+  opacity: 0;
+}
+.m-scan .scaning.active {
+  opacity: 1;
+  animation: myRotate 1s infinite linear;
+}
+.m-scan .scaning img {
+  width: 100%;
+}
+.m-scan .animate{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+.m-scan .animate img{
+	width: 100%;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.m-scan .animate.active{
+	opacity: 1;
+}
+.m-scan .face{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	opacity: 1;
+}
+.m-scan .face img{
+	width: 100%;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.m-scan .btns {
+  width: 100%;
+  padding: 0 26px;
+  position: absolute;
+  left: 0;
+  z-index:  10;
+  bottom: 0.74rem;
+  display: flex;
+  justify-content: space-around;
+}
+.m-scan .btns .btn {
+  width: 2.84rem;
+  height: 0.78rem;
+  position: relative;
+}
+.m-scan .btns .btn input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.m-scan .btns .btn img {
+  width: 100%;
+}
+@keyframes myRotate {
+  0% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: 100%;
+  }
+  100% {
+    margin-top: 200%;
+  }
+}
+/*结果*/
+.m-result {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/index_bg.png") no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: 100% 100%;
+	z-index: 3;
+	display: none;
+}
+.m-result canvas {
+  opacity: 0;
+}
+/*背景图旋转*/
+.m-result .img_rotate{
+	width: 7.5rem;
+	max-height: 7.5rem;
+	transform: rotate(0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	animation: myLoad 20s infinite linear;
+}
+.m-result .img_rotate img{
+	width: 100%;
+	transform: scale(2);
+}
+.m-result .logo {
+  width: 2rem;
+  margin-left: 0.5rem;
+  margin-top: 0.3rem;
+  position: relative;
+  z-index: 9;
+}
+.m-result .logo img {
+  width: 100%;
+}
+.bg {
+  width: 6.5rem;
+  height: 9rem;
+  margin: 0 auto;
+  margin-top: 4%;
+  background: url("../images/4_c.png") no-repeat center center;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+	position: relative;
+	z-index: 2;
+	overflow: hidden;
+
+}
+.bg .avatar {
+  width: 4rem;
+  height: 4rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: 18%;
+  overflow: hidden;
+  position: relative;
+}
+.bg .avatar .border {
+  width: 100%;
+  /*height: 100%;*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.bg .avatar #showAvator2 {
+  height:100%;
+  margin:0.1rem auto;
+  /*-webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;*/
+}
+.bg .score-text {
+  width: 100%;
+  /*margin: 0 auto;*/
+  display: flex;
+  justify-content: space-around;
+  color: #fff;
+  margin-top: 0.3rem;
+}
+.bg .score-text p {
+  padding: 0rem 0.2rem;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: left center, right center;
+  /* background-image: url("../images/border_l.png"), url("../images/border_r.png"); */
+  -webkit-background-size: contain;
+  background-size: contain;
+  font-size: .3rem;
+}
+.bg .score-text p i{
+	color: #00cedb;
+	font-style: normal;
+	margin: 0 4px;
+}
+.bg .title {
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 0.2rem;
+  margin-top: 0.35rem;
+  text-align: center;
+  color: #fff;
+  font-size: .36rem;
+  /*text-shadow: 3px 3px 7px #00c2fd, -3px -3px 7px #00c2fd;*/
+  border-bottom: 1px solid  #00cedb;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+.bg .code{
+    display: flex;
+    justify-content: space-around;
+    margin-top:.2rem;
+}
+.bg .code .left{
+    width:3.06rem;
+    height:1.02rem;
+    align-self: center;
+    position: relative;
+    font-size:.27rem;
+    text-align: center;
+    color: #fff;
+    line-height: .5rem;
+    /*text-shadow: 3px 3px 13px #00c2fd, -3px -3px 13px #00c2fd;*/
+}
+.bg .code .left img{
+    width:100%;
+    height:100%;
+}
+.bg .code .right{
+    width:1.47rem;
+    height:1.6rem;
+    background: url("../images/code.png") no-repeat center center;
+    background-size: 100% 100%;
+}
+.bg .code .right img{
+    width:1rem;
+    height:1rem;
+    margin: .13rem auto;
+}
+.m-result .btn {
+  position: absolute;
+  z-index: 100;
+  width: 2.84rem;
+  height: 0.78rem;
+  bottom: 0.74rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.m-result .btn input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.m-result .btn img {
+  width: 100%;
+}
+.m-result #saveImg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: red;
+  z-index: 99;
+}
+/*loading*/
+#loading{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.4);
+	color: #fff;
+	z-index: 10;
+	text-align: center;
+	 display: none;
+}
+#loading div{
+	width: 100%;
+	height: 1rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+}
+#loading div img{
+	width: 1rem;
+	height: 1rem;
+	margin: 0 auto;
+}
+#loading.active div img{
+	animation: myLoad 3s infinite linear;
+}
+@keyframes myLoad{
+	from{
+		transform: rotate(0);
+	}
+	to{transform: rotate(360deg);}
+}

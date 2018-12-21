@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/ydui.flexible.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/start.css">
+    <script src="js/html2canvas.js"></script>
+    <title>为技术代颜</title>
+</head>
+<body>
+<div class="m-wrap container active">
+    <div class="icon">
+        <img src="images/logo.png" alt="">
+        <div class="precent"></div>
+    </div>
+    <div class="index_loading">
+        <div class="process">
+            <img src="images/load_a.png" alt="">
+        </div>
+        <div class="text">
+            <img src="images/loading1.png" alt="">
+        </div>
+    </div>
+</div>
+<div class="m-start container">
+	<div class="img_rotate">
+		<img src="images/circle.png"/>
+	</div>
+	<div class="start_logo">
+		<img src="images/2_bg.png"/>
+	</div>
+    <div class="btn">
+        <input type="file" accept="image/*" name="avator" />
+        <img src="images/start.png" alt="">
+    </div>
+</div>
+<div class="m-scan container" style="">
+	<audio id="long_music" loop>
+		<source src="images/audio.mp3" type="audio/mp3"></source>
+	</audio>
+
+    <img id="showAvator1" src="" alt="">
+    <!--<div class="face">-->
+    	<!--<img src="images/face.png" alt="" />-->
+    <!--</div>-->
+    <div class="animate">
+    	<img src="images/dongtu.gif" alt="" />
+    </div>
+    <!--<div class="scaning">-->
+        <!--<img src="images/text_border.png" alt="">-->
+    <!--</div>-->
+    <div class="btns">
+        <div class="btn scan">
+            <img src="images/start_scan.png" alt="" onclick="noise()"/>
+            <!--<audio id="bgMusic">
+			    <source src="images/voices.mp3" type="audio/mp3">
+			</audio>-->
+        </div>
+        <div class="btn">
+            <input type="file" accept="image/*" name="avator" />
+            <img src="images/again_upload.png" alt="" />
+        </div>
+    </div>
+
+</div>
+<div class="m-result container">
+
+    <img id="saveImg" width="100%" height="100%" style="opacity: 0;" src="" />
+    <div class="logo">
+        <img src="images/logo1.png" alt="">
+    </div>
+    <div class="img_rotate">
+		<img src="images/circle.png"/>
+	</div>
+    <div class="bg">
+
+        <div class="avatar">
+            <img src="images/border.png" class="border" alt="">
+            <img id="showAvator2" crossOrigin="anonymous"  src="" alt="">
+        </div>
+        <div class="score-text">
+            <p class="score"></p>
+            <p class="text"> </p>
+        </div>
+        <div class="title"></div>
+        <div class="code">
+            <div class="left">
+                2018百度云智峰会<br />
+                代颜人次已达到
+                <span>15000</span>
+            </div>
+            <div class="right">
+                <img src="images/erweima.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="btn again">
+        <!--<input type="file" accept="image/*" name="avator" />-->
+        <img src="images/again.png" alt="" />
+        <!--<audio src="voice/voices.mp3"></audio>-->
+    </div>
+</div>
+<div id="view">
+	
+</div>
+<div id="loading">
+	<div>
+		<img src="images/loading.png"/>
+	</div>
+</div>
+</body>
+<script src="js/jweixin-1.0.0.js"></script>
+<script src="js/exif.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+<script src="js/common.js"></script>
+</html>
