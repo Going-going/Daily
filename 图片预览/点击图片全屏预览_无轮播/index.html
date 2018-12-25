@@ -8,6 +8,23 @@
     <link rel="stylesheet" href="public.css">
     <title>图片预览</title>
     <style>
+        .img-box{
+            float: left;
+            width: 150px;
+            height: 150px;
+            border: 1px solid #e4e4e4;
+            position: relative;
+        }
+        .img-box img{
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
         /* 样式start */
         .model{
             position: fixed;
@@ -23,8 +40,8 @@
             animation: fade-in 1s;
         }
         .model .model-box img{
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 90%;
+            max-height: 90%;
             margin: auto;
             position: absolute;
             top: 0;
@@ -34,14 +51,15 @@
         }
         .model .close{
             background: none;
-            border: 0;
             position: absolute;
             right: 5%;
-            top: 10%;
+            top: 5%;
             color: #fff;
             width: 25px;
             height: 25px;
             font-size: 14px;
+            border: 1px solid #e4e4e4;
+            border-radius: 50%;
         }
         .model .close:hover{
             color: #e4e4e4;
@@ -66,15 +84,23 @@
     </style>
 </head>
 <body>
-    <img width="150" height="150" src="1.png" alt="">
-    <div>
-        <img width="150" height="150" src="2.png" alt="">
+    <div class="img-box">
+        <img src="1.png" alt="">
+    </div>
+    <div class="img-box">
+        <img src="2.png" alt="">
+    </div>
+    <div class="img-box">
+        <img src="../images/20160430161245_w3nhN.jpeg" alt="">
+    </div>
+    <div class="img-box">
+        <img src="../images/20160507144754_ijmkv.jpeg" alt="">
+    </div>
+    <div class="img-box">
+        <img src="../images/20160721020722_XU3wV.jpeg" alt="">
     </div>
 </body>
 <script>
-
-
-
     var imgPreview = (function() {
         var container = document.createElement('div');
         container.className = 'model';
@@ -91,6 +117,11 @@
             }
             document.addEventListener('click', function(e) {
                 e.stopPropagation();
+                console.log(e);
+                if(e.target.className == 'img-box'){
+                    var d = e.target.getElementsByTagName('img')[0];
+                    showModel(d.src)
+                }
                 if(e.target.tagName == 'IMG' && e.target.src){
                     showModel(e.target.src)
                 }

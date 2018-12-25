@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.swiper-container{
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    /*overflow-x: scroll;*/
+}
+.swiper-container .slide-wrapper{
+    width: 100%;
+    height: 100%;
+}
+.swiper-container .slide-wrapper .slide{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+.swiper-container .slide-wrapper img{
+    width: 100%;
+    height: 100%;
+}
