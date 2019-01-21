@@ -43,7 +43,7 @@ $(function() {
                 // background: false,
 
                 // autoCrop: false,
-                // autoCropArea: 0.5,
+                autoCropArea: 1,
                 // dragCrop: false,
                 // movable: false,
                 // resizable: false,
