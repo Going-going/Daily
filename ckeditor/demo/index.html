@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>demo</title>
+        <script src="../ckeditor.js"></script>
+</head>
+<body>
+    <textarea name="" id="main" cols="30" rows="10" class="ckeditor"></textarea>  
+</body>
+<script>
+    CKEDITOR.replace('main', {
+        fontSize_defaultLabel: '18px'
+    });
+
+    CKEDITOR.instances["main"].on("instanceReady", function(ev){
+        // console.log(ev);
+        this.document.getBody().setStyle('font-size', '18px')
+        // function (ev) {
+//         ev.editor.dataProcessor.htmlFilter.addRules({
+//             elements:{
+//                 $: function (element) {
+//                     // Output dimensions of images as width and height
+//                     if (element.name == 'p') {
+//                         element.attributes.style = "font-size:18px";
+//                     }
+//                     return element;
+//                 }
+//             }
+//         });
+    });
+    CKEDITOR.instances["main"].on("complete", function(obj){
+        console.log(this.document.getBody());
+    });
+</script>
+</html>

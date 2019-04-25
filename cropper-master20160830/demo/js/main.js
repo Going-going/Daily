@@ -24,6 +24,8 @@ $(function() {
 
     (function() {
         var $image = $('.img-container > img'),
+            $avatarForm = $('.container').find('form'),
+            $avatarData = $avatarForm .find('input[name="avatar_data"]'),
             $dataX = $('#dataX'),
             $dataY = $('#dataY'),
             $dataHeight = $('#dataHeight'),
@@ -43,7 +45,7 @@ $(function() {
                 // background: false,
 
                 // autoCrop: false,
-                autoCropArea: 1,
+                // autoCropArea: 1,
                 // dragCrop: false,
                 // movable: false,
                 // resizable: false,
@@ -69,7 +71,10 @@ $(function() {
 
                 aspectRatio: 16 / 9,
                 preview: '.img-preview',
+                strict: false,
                 crop: function(data) {
+                    console.log(data);
+                    $avatarData.val(JSON.stringify(data));
                     $dataX.val(Math.round(data.x));
                     $dataY.val(Math.round(data.y));
                     $dataHeight.val(Math.round(data.height));
@@ -108,9 +113,6 @@ $(function() {
             var data = $(this).data(),
                 $target,
                 result;
-
-
-
             if (data.method) {
                 data = $.extend({}, data); // Clone a new one
                 if (typeof data.target !== 'undefined') {
@@ -171,7 +173,22 @@ $(function() {
         });
 
         function uploadPic(data) {
+            console.log($avatarForm)
+            var url = $avatarForm.attr('action');
+            var formData = new FormData($avatarForm[0]);
+            console.log(formData)
+            $.ajax({
+                type: 'post',
+                url: url,
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    console.log(res);
+                }
 
+            })
 
             if ($filename.indexOf('.gif') > -1) {
                 alert('gif不能裁剪');
@@ -208,14 +225,15 @@ $(function() {
 
                 if (files && files.length) {
                     file = files[0];
-                    console.log($inputImage.val());
+                    console.log(file)
                     $filename = $inputImage.val().split('\\')[2];
+                    console.log($filename);
                     if (/^image\/\w+$/.test(file.type)) {
                         blobURL = URL.createObjectURL(file);
                         $image.one('built.cropper', function() {
                             URL.revokeObjectURL(blobURL); // Revoke when load complete
                         }).cropper('reset', true).cropper('replace', blobURL);
-                        $inputImage.val('');
+                        
                     } else {
                         showMessage('Please choose an image file.');
                     }

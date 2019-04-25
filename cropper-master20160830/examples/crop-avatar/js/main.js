@@ -37,7 +37,7 @@
         this.$avatarPreview = this.$avatarModal.find('.avatar-preview');
 
         this.init();
-        console.log(this);
+        // console.log(this);
     }
 
     CropAvatar.prototype = {
@@ -208,6 +208,7 @@
                     aspectRatio: 1,
                     preview: this.$avatarPreview.selector,
                     strict: false,
+                    autoCropArea: 1,
                     crop: function(data) {
                         var json = [
                             '{"x":' + data.x,
@@ -237,7 +238,7 @@
             var url = this.$avatarForm.attr('action'),
                 data = new FormData(this.$avatarForm[0]),
                 _this = this;
-
+            console.log(data);
             $.ajax(url, {
                 type: 'post',
                 data: data,

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <ul>
+        <li data-magnify="gallery" data-src="./images/a1.png" data-caption="测试图片一">
+            <img src="./images/a1.png" alt="">
+        </li>
+        <li data-magnify="gallery" data-src="./images/a2.png" data-caption="测试图片一">
+            <img src="./images/a2.png" alt="">
+        </li>
+        <li data-magnify="gallery" data-src="./images/a3.png" data-caption="测试图片一">
+            <img src="./images/a3.png" alt="">
+        </li>
+        <li data-magnify="gallery" data-src="./images/a4.png" data-caption="测试图片一">
+            <img src="./images/a4.png" alt="">
+        </li>
+        <li data-magnify="gallery" data-src="./images/a5.png" data-caption="测试图片一">
+            <img src="./images/a5.png" alt="">
+        </li>
+    </ul>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.rotate.min.js"></script>
+<script src="./js/index.js"></script>
+<script>
+$(function() {
+    $('[data-magnify]').Magnify({
+        Toolbar: [
+            'prev',
+            'next',
+            'rotateLeft',
+            'rotateRight', 
+            'zoomIn',
+            'actualSize',
+            'zoomOut'
+        ],
+        modalSize: ['100%', '100%']
+    })
+})
+</script>
+</html>

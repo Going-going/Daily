@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="public.css">
+    <title>图片预览</title>
+    <style>
+        .img-box{
+            float: left;
+            width: 150px;
+            height: 150px;
+            border: 1px solid #e4e4e4;
+            position: relative;
+        }
+        .img-box img{
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        /* 样式start */
+        .model{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+        }
+        .model.fadeIn{
+            display: block;
+            animation: fade-in 1s;
+        }
+        .model .model-box img{
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+        .model .close{
+            background: none;
+            position: absolute;
+            right: 5%;
+            top: 5%;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+            border: 1px solid #e4e4e4;
+            border-radius: 50%;
+        }
+        .model .close:hover{
+            color: #e4e4e4;
+        }
+        .model.in .model-box{
+            width: 75%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+
+        }
+        @keyframes fade-in {
+            0%{
+                opacity:0;
+            }
+            100%{
+                opacity:1;
+
+            }
+        }
+        /* 样式END */
+    </style>
+</head>
+<body>
+    <div class="img-box">
+        <img src="1.png" alt="">
+    </div>
+    <div class="img-box">
+        <img src="2.png" alt="">
+    </div>
+    <div class="img-box">
+        <img src="../images/20160430161245_w3nhN.jpeg" alt="">
+    </div>
+    <div class="img-box">
+        <img src="../images/20160507144754_ijmkv.jpeg" alt="">
+    </div>
+    <div class="img-box">
+        <img src="../images/20160721020722_XU3wV.jpeg" alt="">
+    </div>
+</body>
+<script>
+    var iframe = window.parent;
+    document.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var oModel = iframe.document.getElementsByClassName('model')[0];
+        if(e.target.className == 'img-box'){
+            var d = e.target.getElementsByTagName('img')[0];
+            oModel.classList.add('fadeIn');
+            oModel.getElementsByTagName('img')[0].src = d.src;
+        }
+        if(e.target.tagName == 'IMG' && e.target.src){
+            oModel.classList.add('fadeIn');
+            oModel.getElementsByTagName('img')[0].src = e.target.src;
+        }
+    })
+</script>
+</html>

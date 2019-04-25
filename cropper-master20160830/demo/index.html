@@ -22,119 +22,141 @@
 <body>
     <!-- Content -->
     <div class="container">
-        <label class="" for="inputImage" title="Upload image file" style="cursor: pointer;background: #f7f7f7;padding-right: 12px;">
-            <div class="btn btn-primary btn-upload">
-                <input class="sr-only" id="inputImage" name="file" type="file" accept="image/*">
-                <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
-              <span class="icon icon-upload"></span>
-                </span>
-            </div>
-            <span>请选择文件</span>
-        </label>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="img-container">
-                    <img src="" alt="">
+        <form action="crop.php" enctype="multipart/form-data" method="post">
+            <label class="" for="inputImage" title="Upload image file">
+                <!-- Upload image and data -->
+                <div class="btn btn-primary btn-upload">
+                    <input class="avatar-src" name="avatar_src" type="hidden">
+                    <input class="avatar-data" name="avatar_data" type="hidden">
+                    <input class="avatar-input" id="inputImage" name="avatar_file" type="file" accept="image/*">
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="docs-preview clearfix">
-                    <div class="img-preview preview-lg"></div>
-                    <div class="img-preview preview-md"></div>
-                    <div class="img-preview preview-sm"></div>
-                </div>
-            </div>
+            </label>
+        
+            
+
             <div class="row">
-                <div class="col-md-9 docs-buttons" style="margin-left: 15px;">
-                    <div class="btn-group">
-                        <button class="btn btn-primary" data-method="setDragMode" data-option="move" type="button" title="Move">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
-                        <span class="icon icon-move"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="setDragMode" data-option="crop" type="button" title="Crop">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;crop&quot;)">
-                        <span class="icon icon-crop"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="zoom" data-option="0.1" type="button" title="Zoom In">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)">
-                        <span class="icon icon-zoom-in"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="zoom" data-option="-0.1" type="button" title="Zoom Out">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, -0.1)">
-                        <span class="icon icon-zoom-out"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button" title="Rotate Left">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, -45)">
-                        <span class="icon icon-rotate-left"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="rotate" data-option="45" type="button" title="Rotate Right">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, 45)">
-                        <span class="icon icon-rotate-right"></span>
-                            </span>
-                        </button>
+                <div class="col-md-8">
+                    <div class="img-container">
+                        <img src="" alt="">
                     </div>
-                    <div class="btn-group">
-                        <button class="btn btn-primary" data-method="disable" type="button" title="Disable">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;disable&quot;)">
-                        <span class="icon icon-lock"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="enable" type="button" title="Enable">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;enable&quot;)">
-                        <span class="icon icon-unlock"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="clear" type="button" title="Clear">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)">
-                        <span class="icon icon-remove"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="reset" type="button" title="Reset">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;reset&quot;)">
-                        <span class="icon icon-refresh"></span>
-                            </span>
-                        </button>
-                        <button class="btn btn-primary" data-method="destroy" type="button" title="Destroy">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;destroy&quot;)">
-                        <span class="icon icon-off"></span>
-                            </span>
-                        </button>
+                </div>
+                <div class="col-md-3">
+                    <div class="docs-preview clearfix">
+                        <div class="img-preview preview-lg"></div>
+                        <div class="img-preview preview-md"></div>
+                        <div class="img-preview preview-sm"></div>
                     </div>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary active" data-method="setAspectRatio" data-option="1.7777777777777777" title="Set Aspect Ratio">
-                            <input class="sr-only" id="aspestRatio1" name="aspestRatio" value="1.7777777777777777" type="radio">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 16 / 9)">16:9</span>
-                        </label>
-                        <label class="btn btn-primary" data-method="setAspectRatio" data-option="1.3333333333333333" title="Set Aspect Ratio">
-                            <input class="sr-only" id="aspestRatio2" name="aspestRatio" value="1.3333333333333333" type="radio">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 4 / 3)">4:3</span>
-                        </label>
-                        <label class="btn btn-primary" data-method="setAspectRatio" data-option="1" title="Set Aspect Ratio">
-                            <input class="sr-only" id="aspestRatio3" name="aspestRatio" value="1" type="radio">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 1 / 1)">1:1</span>
-                        </label>
-                        <label class="btn btn-primary" data-method="setAspectRatio" data-option="0.6666666666666666" title="Set Aspect Ratio">
-                            <input class="sr-only" id="aspestRatio4" name="aspestRatio" value="0.6666666666666666" type="radio">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 2 / 3)">2:3</span>
-                        </label>
-                        <label class="btn btn-primary" data-method="setAspectRatio" data-option="NaN" title="Set Aspect Ratio">
-                            <input class="sr-only" id="aspestRatio5" name="aspestRatio" value="NaN" type="radio">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, NaN)"> Free </span>
-                        </label>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn btn-primary btn-block avatar-save" data-method="getCroppedCanvas" type="submit">
-                            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)">Done</span>
-                        </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 docs-buttons" style="margin-left: 15px;">
+                        <div class="btn-group">
+                            <!-- 使用相对偏移量移动图片 -->
+                            <button class="btn btn-primary" data-method="setDragMode" data-option="move" type="button" title="Move">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+                            <span class="icon icon-move"></span>
+                                </span>
+                            </button>
+                            <!-- 自由裁剪 -->
+                            <button class="btn btn-primary" data-method="setDragMode" data-option="crop" type="button" title="Crop">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;crop&quot;)">
+                            <span class="icon icon-crop"></span>
+                                </span>
+                            </button>
+                            <!-- 放大 -->
+                            <button class="btn btn-primary" data-method="zoom" data-option="0.1" type="button" title="Zoom In">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)">
+                            <span class="icon icon-zoom-in"></span>
+                                </span>
+                            </button>
+                            <!-- 缩小 -->
+                            <button class="btn btn-primary" data-method="zoom" data-option="-0.1" type="button" title="Zoom Out">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, -0.1)">
+                            <span class="icon icon-zoom-out"></span>
+                                </span>
+                            </button>
+                            <!-- 向左旋转 度数可定 -->
+                            <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button" title="Rotate Left">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, -45)">
+                            <span class="icon icon-rotate-left"></span>
+                                </span>
+                            </button>
+                            <!-- 向右旋转 -->
+                            <button class="btn btn-primary" data-method="rotate" data-option="45" type="button" title="Rotate Right">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, 45)">
+                            <span class="icon icon-rotate-right"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="btn-group">
+                            <!-- 锁定裁剪 -->
+                            <button class="btn btn-primary" data-method="disable" type="button" title="Disable">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;disable&quot;)">
+                            <span class="icon icon-lock"></span>
+                                </span>
+                            </button>
+                            <!-- 解锁 -->
+                            <button class="btn btn-primary" data-method="enable" type="button" title="Enable">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;enable&quot;)">
+                            <span class="icon icon-unlock"></span>
+                                </span>
+                            </button>
+                            <!-- 清楚所有裁剪 -->
+                            <button class="btn btn-primary" data-method="clear" type="button" title="Clear">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)">
+                            <span class="icon icon-remove"></span>
+                                </span>
+                            </button>
+                            <!-- 重置 -->
+                            <button class="btn btn-primary" data-method="reset" type="button" title="Reset">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;reset&quot;)">
+                            <span class="icon icon-refresh"></span>
+                                </span>
+                            </button>
+                            <!-- 销毁裁剪 -->
+                            <button class="btn btn-primary" data-method="destroy" type="button" title="Destroy">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;destroy&quot;)">
+                            <span class="icon icon-off"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <!-- 图片比例设定 
+                            16:9 = 1.777777777777
+                            4:3 = 1.333333333333
+                            1:1 = 1
+                            2:3 = 0.6666666666
+                        -->
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active" data-method="setAspectRatio" data-option="1.7777777777777777" title="Set Aspect Ratio">
+                                <input class="sr-only" id="aspestRatio1" name="aspestRatio" value="1.7777777777777777" type="radio">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 16 / 9)">16:9</span>
+                            </label>
+                            <label class="btn btn-primary" data-method="setAspectRatio" data-option="1.3333333333333333" title="Set Aspect Ratio">
+                                <input class="sr-only" id="aspestRatio2" name="aspestRatio" value="1.3333333333333333" type="radio">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 4 / 3)">4:3</span>
+                            </label>
+                            <label class="btn btn-primary" data-method="setAspectRatio" data-option="1" title="Set Aspect Ratio">
+                                <input class="sr-only" id="aspestRatio3" name="aspestRatio" value="1" type="radio">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 1 / 1)">1:1</span>
+                            </label>
+                            <label class="btn btn-primary" data-method="setAspectRatio" data-option="0.6666666666666666" title="Set Aspect Ratio">
+                                <input class="sr-only" id="aspestRatio4" name="aspestRatio" value="0.6666666666666666" type="radio">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 2 / 3)">2:3</span>
+                            </label>
+                            <label class="btn btn-primary" data-method="setAspectRatio" data-option="NaN" title="Set Aspect Ratio">
+                                <input class="sr-only" id="aspestRatio5" name="aspestRatio" value="NaN" type="radio">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, NaN)"> Free </span>
+                            </label>
+                        </div>
+                        <!-- 提交 -->
+                        <div class="btn-group">
+                            <button class="btn btn-primary btn-block avatar-save" data-method="getCroppedCanvas" type="button">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)">Done</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div id="image">
             <img src="" width="200" height="200" alt="">
         </div>
