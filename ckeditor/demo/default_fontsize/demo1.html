@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Custom basic text styles definition</title>
+  <script src="https://cdn.ckeditor.com/4.11.4/standard-all/ckeditor.js"></script>
+</head>
+
+<body>
+  <textarea cols="80" id="editor2" name="editor2" rows="10" data-sample-short>&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href=&quot;https://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+  <script>
+    CKEDITOR.replace('editor2', {
+      height: 200,
+      // By default, some basic text styles buttons are removed in the Standard preset.
+      // The code below resets the default config.removeButtons setting.
+      removeButtons: '',
+      // Custom style definition for the Bold feature.
+      coreStyles_bold: {
+        element: 'b',
+        overrides: 'strong'
+      },
+      // Custom style definition for the Italic feature.
+      coreStyles_italic: {
+        element: 'i',
+        overrides: 'em'
+      }
+    });
+  </script>
+</body>
+
+</html>

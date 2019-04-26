@@ -8,4 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	// config.fontSize_defaultLabel = 18
+	// config.uploadUrl = '/apps/ckfinder/3.4.5/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json';
+	config.extraPlugins += (config.extraPlugins ? ',lineheight' : 'lineheight');
+	
 };
