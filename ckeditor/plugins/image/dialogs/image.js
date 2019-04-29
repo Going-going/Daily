@@ -228,6 +228,8 @@
 								}
 							},
 							commit: function(a, b) {
+							console.log(a)
+							console.log(b)
 								1 == a && (this.getValue() || this.isChanged()) ? (b.data("cke-saved-src", this.getValue()), b.setAttribute("src", this.getValue())) : 8 == a && (b.setAttribute("src", ""), b.removeAttribute("src"))
 							},
 							validate: CKEDITOR.dialog.validate.notEmpty(d.lang.image.urlMissing)

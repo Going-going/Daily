@@ -39,11 +39,9 @@ CKEDITOR.replace('main', {
 	}, {
 		name: 'tools',
 		items: ['Maximize', 'ShowBlocks', '-', 'About']
-	}]
-	// filebrowserBrowseUrl: 'https://cdn.ckeditor.com/apps/ckfinder/3.4.5/ckfinder.html',
-	// filebrowserImageBrowseUrl: 'https://cdn.ckeditor.com/apps/ckfinder/3.4.5/ckfinder.html?type=Images',
-	// filebrowserUploadUrl: 'https://cdn.ckeditor.com/apps/ckfinder/3.4.5/core/connector/php/connector.php?command=QuickUpload&type=Files',
-	// filebrowserImageUploadUrl: 'https://cdn.ckeditor.com/apps/ckfinder/3.4.5/core/connector/php/connector.php?command=QuickUpload&type=Images',
+	}],
+	// imageUploadUrl: '/uploader/upload.php?type=Images',
+    filebrowserImageUploadUrl: 'http://47.104.133.96/shaker/api/file/upload'
 });
 CKEDITOR.instances["main"].on("instanceReady", function(ev) {    
 	// 设置p标签默认值
