@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	// async function start(value) {
+	// 	return value;
+	// }
+	// function timeout(ms) {
+	// 	setTimeout(function() {} ,ms * 1000);
+	// }
+	// console.log(start('hello'));  //promise对象 如果要获取返回值 需要遵循promise返回 .then返回值
+	// start('aaa').then(v => {
+	// 	console.log(v);
+	// })
+
+	function takeLongTime() {
+		return new Promise(resolve => {
+			setTimeout(() => resolve('long_time_value'), 1000);
+		})
+	}
+	// then接受返回值
+	takeLongTime().then(v => {
+		console.log('got',v)
+	})
+	// await 接收返回值
+	async function test() {
+		const v = await takeLongTime();
+		console.log(v)
+	}
+	test();
+</script>

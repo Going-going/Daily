@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let calulate = n => {
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve(n * n), 1000)
+		})
+	}
+	let step1 = n => {
+		console.log(`step1 with ${n}`);
+		// return 
+	}
+	let doIt = () => {
+		let time1 = 100;
+		step1(time1);
+	}
+	doIt();
+	calulate(100).then(v => {
+		console.log(v)
+	})
+</script>
+</html>
