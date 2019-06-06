@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>媒体进度条</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+	<div id="box">
+		<span id="btn"></span>
+	</div>
+	<div class="value">0</div>
+</body>
+<script>
+	function processBar(bar, btn) {
+		this.bar = document.getElementById(bar);
+		this.btn = document.getElementById(btn);
+		this.btnLeft = this.btn.offsetLeft;
+		this.barLeft = this.bar.offsetLeft;
+		this.width = this.bar.offsetWidth;
+		this.btnWidth = this.btn.offsetWidth;
+		this.init(); 
+	}
+	processBar.prototype = {
+		init: function() {
+			var _this = this;
+			_this.btn.ontouchstart = function(e) {
+				_this.bar.ontouchmove = function(e) {
+					var d = e.touches[0].clientX - (_this.barLeft );
+					if(d > 0 && d < _this.width){
+						_this.onDrag(d);
+					}else if(d >= _this.width-_this.btnWidth/2){
+						_this.onDrag(_this.width-_this.btnWidth/2);
+					}else{
+						_this.onDrag(_this.btnLeft);
+					}
+				}
+			}
+			_this.btn.ontouchend = function() {_this.bar.touchmove = null;}
+			_this.bar.onclick = function() {
+				
+			}
+		},
+		onDrag: function(d) {
+			var E = 100 / (this.width - this.btnWidth/2);
+			this.btn.style.left = d + 'px';
+			document.getElementsByClassName('value')[0].innerHTML = parseInt(Math.max(0, d) * E);
+		}
+	}
+	new processBar('box', 'btn');
+</script>
+</html>
