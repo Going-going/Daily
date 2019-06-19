@@ -1,0 +1,11 @@
+<!--pages/bluetooth/bluetooth.wxml-->
+<button catchtap='openBluetooth'>开始扫描</button>
+<button catchtap='startBluetoothDevicesDiscovery'>搜索设备</button>
+<button catchtap='stopBluetoothDevicesDiscovery'>停止扫描</button>
+<view>
+  
+  <view wx:for="{{devices}}" wx:key="{{index}}">
+    <view>{{item.deviceId}}</view>
+    <view>{{item.advertisData}}</view>
+  </view>
+</view>
