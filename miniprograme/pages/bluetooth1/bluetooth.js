@@ -62,7 +62,7 @@ Page({
     }
     this._discoveryStarted = true
     wx.startBluetoothDevicesDiscovery({
-      allowDuplicatesKey: true,
+      allowDuplicatesKey: false,
       success: (res) => {
         console.log('startBluetoothDevicesDiscovery success', res)
         this.onBluetoothDeviceFound()
@@ -95,16 +95,21 @@ Page({
   createBLEConnection(e) {
     const ds = e.currentTarget.dataset
     const deviceId = ds.deviceId
-    const name = ds.name
+    const name = ds.name;
+    console.log(ds);
     wx.createBLEConnection({
       deviceId,
       success: (res) => {
+        console.log(res);
         this.setData({
           connected: true,
           name,
           deviceId,
         })
         this.getBLEDeviceServices(deviceId)
+      },
+      fail: err => {
+        console.log(err);
       }
     })
     this.stopBluetoothDevicesDiscovery()

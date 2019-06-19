@@ -45,6 +45,7 @@ Page({
     var _this = this;
     wx.startBluetoothDevicesDiscovery({
       // services: ['FEE7'],
+      allowDuplicatesKey: false,
       success(res) {
         console.log(res);
         _this.onBluetoothDeviceFound();
