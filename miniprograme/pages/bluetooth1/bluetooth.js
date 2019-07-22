@@ -65,12 +65,24 @@ Page({
       allowDuplicatesKey: false,
       success: (res) => {
         console.log('startBluetoothDevicesDiscovery success', res)
-        this.onBluetoothDeviceFound()
+        // this.onBluetoothDeviceFound();
+        this.getBluetoothDevices();
       },
     })
   },
   stopBluetoothDevicesDiscovery() {
     wx.stopBluetoothDevicesDiscovery()
+  },
+  getBluetoothDevices() {
+    wx.getBluetoothDevices({
+      success: res => {
+        console.log(this);
+        this.setData({
+          devices: res.devices
+        }) 
+        this.stopBluetoothDevicesDiscovery();
+      }
+    })
   },
   onBluetoothDeviceFound() {
     wx.onBluetoothDeviceFound((res) => {
@@ -93,6 +105,9 @@ Page({
     })
   },
   createBLEConnection(e) {
+    wx.showLoading({
+      title: '正在连接...',
+    })
     const ds = e.currentTarget.dataset
     const deviceId = ds.deviceId
     const name = ds.name;
@@ -100,6 +115,7 @@ Page({
     wx.createBLEConnection({
       deviceId,
       success: (res) => {
+        wx.hideLoading()
         console.log(res);
         this.setData({
           connected: true,
@@ -109,6 +125,7 @@ Page({
         this.getBLEDeviceServices(deviceId)
       },
       fail: err => {
+        wx.hideLoading();
         console.log(err);
       }
     })
