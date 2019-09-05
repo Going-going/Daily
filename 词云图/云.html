@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.jq22.com/demo/tagCloud201805110051/ -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>无标题文档</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>3D标签云</title>
+		<script type="text/javascript" src="./tagcloud.js"></script>
+		<style type="text/css">
+			.fl {
+				float: left;
+			}
+
+			.fr {
+				float: right;
+			}
+
+			.wrapper {
+				width: 584px;
+				height: 318px;
+				margin: 0 auto;
+				background-color: rgba(0,0,0,0.7);
+			}
+
+			.wrapper p {
+				padding-top: 150px;
+				line-height: 27px;
+				color: #999;
+				font-size: 14px;
+				text-align: center;
+			}
+
+			.tagcloud {
+				position: relative;
+				margin-top: 10%;
+			}
+
+			.tagcloud a {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: block;
+				/* padding: 11px 30px; */
+				color: #333;
+				font-size: 14px;
+				/* border: 1px solid #e6e7e8; */
+				border-radius: 18px;
+				background-color: transparent;
+				text-decoration: none;
+				white-space: nowrap;
+				/* -o-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+				-ms-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+				-moz-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+				-webkit-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+				box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34); */
+				-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135, Color='#000000')";
+				/*兼容ie7/8*/
+				filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=125, Strength=9);
+				/*strength是阴影大小，direction是阴影方位，单位为度，可以为负数，color是阴影颜色 （尽量使用数字）使用IE滤镜实现盒子阴影的盒子必须是行元素或以行元素显示（block或inline-block;）*/
+			}
+
+			.tagcloud a:hover {
+				color: #3385cf;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="tagcloud fl" id="tags"></div>
+		</div>
+		<script type="text/javascript">
+			var data =
+			[
+				{
+					name: '想待着就带着',
+					value: 22
+				},
+				{
+					name: '加固覆盖',
+					value: 12
+				},
+				{
+					name: '地铁局',
+					value: 12
+				},
+				{
+					name: '公路',
+					value: 12
+				},
+				{
+					name: '公路',
+					value: 12
+				},
+				{
+					name: '青岛市',
+					value: 12
+				},
+				{
+					name: "水泥",
+					value: 36,
+				},
+				{
+					name: " 钢筋",
+					value: 24
+				},
+				{
+					name: " 亿的",
+					value: 22
+				},
+				{
+					name: " 1号线",
+					value: 14
+				},
+				{
+					name: " 偷工减料",
+					value: 32
+				},
+				{
+					name: " 工程",
+					value: 14
+				},
+				{
+					name: " 施工",
+					value: 14
+				},
+				{
+					name: " 上方",
+					value: 22
+				},
+				{
+					name: " 厅领导",
+					value: 22
+				},
+				{
+					name: " 整改就是刷遍涂料",
+					value: 22
+				},
+				{
+					name: " 隐患",
+					value: 22
+				},
+				{
+					name: " 海底",
+					value: 22
+				},
+				{
+					name: " 考勤",
+					value: 12
+				},
+				{
+					name: " 国家",
+					value: 22
+				},
+				{
+					name: " 可见",
+					value: 22
+				},
+				{
+					name: " 记者",
+					value: 22
+				},
+				{
+					name: " 路基",
+					value: 22
+				},
+				{
+					name: " 不堪设想",
+					value: 24
+				},
+				{
+					name: " 投资近",
+					value: 24
+				},
+				{
+					name: " 交通运输",
+					value: 24
+				},
+				{
+					name: " 没空",
+					value: 24
+				},
+				{
+					name: " 隧道",
+					value: 28
+				},
+				{
+					name: " 裂缝",
+					value: 24
+				},
+				{
+					name: " 整改",
+					value: 40
+				},
+				{
+					name: " 双层",
+					value: 24
+				},
+				{
+					name: " 考勤隧道 负责",
+					value: 12
+				},
+				{
+					name: " 施工单位",
+					value: 12
+				},
+				{
+					name: " 建设",
+					value: 12
+				},
+				{
+					name: " 不想",
+					value: 24
+				},
+				{
+					name: " 2017年",
+					value: 12
+				},
+				{
+					name: " 推诿扯皮",
+					value: 12
+				},
+				{
+					name: " 6月30日",
+					value: 10
+				},
+				{
+					name: " 问题",
+					value: 16
+				},
+				{
+					name: " 作风",
+					value: 10
+				},
+			
+				{
+					name: " 官僚主义",
+					value: 10
+				},
+				{
+					name: " 加固",
+					value: 10
+				},
+				{
+					name: " 作风问题",
+					value: 10
+				},
+				{
+					name: " 千亿元地铁偷工减料",
+					value: 12
+				},
+				{
+					name: " 设计",
+					value: 12
+				},
+				{
+					name: " 交通厅",
+					value: 12
+				},
+				{
+					name: " 严查严惩",
+					value: 12
+				},
+				{
+					name: " 责成",
+					value: 12
+				},
+				{
+					name: "扶贫路",
+					value: 12
+				},
+				{
+					name: "处理",
+					value: 12
+				},
+				{
+					name: "工作",
+					value: 12
+				},
+				{
+					name: "项目",
+					value: 12
+				},
+				{
+					name: "交通",
+					value: 12
+				},
+				{
+					name: "当地",
+					value: 12
+				},
+				{
+					name: "报告",
+					value: 12
+				},
+				{
+					name: "青岛地铁集团",
+					value: 12
+				},
+				{
+					name: "负责人",
+					value: 12
+				},
+				{
+					name: "调查组",
+					value: 12
+				},
+				{
+					name: "质量问题",
+					value: 12
+				},
+				{
+					name: "官员",
+					value: 14
+				},
+				{
+					name: "地铁施工偷工减料",
+					value: 22
+				},
+				{
+					name: " 青岛学深圳",
+					value: 23
+				},
+				{
+					name: " 青岛",
+					value: 50
+				}
+			]
+			var box = document.getElementById('tags');
+			var str = '';
+			for(var i = 0;i < data.length;i++){
+				var r = Math.random() * 255, g = Math.random() * 255, b = Math.random() * 255;
+				var fontSize = parseInt(Math.random() * 38 + 12);
+				console.log(fontSize)
+				str += `<a style="color: rgb(${r}, ${g}, ${b});font-size:${fontSize}!important;" href="#">${data[i].name}</a>`
+			}
+			box.innerHTML = str; 
+			/*3D标签云*/
+			tagcloud({
+				selector: ".tagcloud", //元素选择器
+				fontsize: 16, //基本字体大小, 单位px
+				radius: 80, //滚动半径, 单位px
+				mspeed: "slow", //滚动最大速度, 取值: slow, normal(默认), fast
+				ispeed: "slow", //滚动初速度, 取值: slow, normal(默认), fast
+				direction: 135, //初始滚动方向, 取值角度(顺时针360): 0对应top, 90对应left, 135对应right-bottom(默认)...
+				keep: false //鼠标移出组件后是否继续随鼠标滚动, 取值: false, true(默认) 对应 减速至初速度滚动, 随鼠标滚动
+			});
+		</script>
+
+		<div id="cli_dialog_div"></div>
+	</body>
+</html>
