@@ -1,0 +1,21 @@
+<template>
+	<div>
+		<div @click="test">
+		        <text>点击页面发送数据</text>
+		    </div>
+	</div>
+</template>
+
+<script>
+	export default {
+		methods: {
+			test(e) {
+				uni.postMessage({test: "数据",value:"数据"});
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>

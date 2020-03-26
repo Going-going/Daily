@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #example_video_1 {
+            width: 100%;
+        }
+        
+        .aa {
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: red;
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+
+    <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls x5-playsinline="" playsinline="" webkit-playsinline="" preload="metadata" width="640" height="264" poster="http://vjs.zencdn.net/v/oceans.png">
+        <source src="http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8">
+    </video>
+    <div class="aa">232323</div>
+</body>
+<script>
+    var clicentHeight = document.documentElement.clientHeight;
+    console.log(clicentHeight)
+    var player = videojs('example_video_1', {
+        muted: false,
+        controls: true,
+        height: clicentHeight,
+        preload: 'auto',
+        // width: ,
+        loop: true,
+        // 更多配置.....
+    });
+</script>
+
+</html>

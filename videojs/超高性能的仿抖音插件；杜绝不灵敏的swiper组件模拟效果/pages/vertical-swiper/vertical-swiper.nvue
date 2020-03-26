@@ -1,0 +1,211 @@
+<template>
+<view class="container">
+	<list @loadmore="getData()" :loadmoreoffset="wHeight*3" :show-scrollbar="false" ref="listBox" :pagingEnabled="true" :scrollable="true">
+		<cell v-for="(item,i) in dataList" :key="i">
+			<div ref="item" class="item"  :style="boxStyle">
+				<jVideo
+					v-if="Math.abs(k-i)<=1"
+					:state="item.state"
+					:src="item.src"
+					:boxStyle="boxStyle"
+				></jVideo>
+				<view class="videoHover" v-if="1" @click="tapVideoHover(item.state,$event)" :style="boxStyle">
+				  	<image v-if="item.state=='pause'" class="playState" src="../../static/img/index/play.png"></image>
+				</view>
+				<view class="userInfo" @appear="k=i">
+				 	<image class="userAvatar" src="https://ftp.bmp.ovh/imgs/2019/10/c9583cb026b4251f.jpeg"></image>
+				 	<view class="like" @click="cLike(item.video_id,item.like);item.like=!item.like">
+				 		<image v-if="item.like" class="likeIco" src="../../static/img/index/xinActive.png"/>
+				 		<image v-else class="likeIco" src="../../static/img/index/xin.png"/>
+				 		<text class="likeNum" :class="{'likeNumActive':item.like}">{{item.like_n}}</text>
+				 	</view>
+				 	<view class="comment" @click="toComment(i)">
+				 		<image class="commentIco" src="../../static/img/index/comment.png"></image>
+						<text style="color: #FFFFFF;">{{Math.abs(k-i)}}</text>
+				 	</view>
+				 	<view class="share" @click="share">
+				 		<image class="shareIco" src="../../static/img/index/share.png"></image>
+				 		<text class="shareTex">分享</text>
+				 	</view>
+				</view>
+				<view class="content">
+				 	<text class="userName">@{{item.title}}-i={{i}}</text>
+				 	<text class="words">{{item.msg}}-=-=---k={{k}}</text>
+				</view>
+			</div>
+		</cell>
+	</list>
+</view>
+</template>
+<script>
+const dom = weex.requireModule('dom');
+const BindingX = uni.requireNativePlugin('bindingx');
+import jVideo from './j-video.nvue';
+export default {
+		components: {jVideo},
+        data: {
+			dataList:[],
+			scrollTop:0,
+			oldScrollTop:0,
+			wHeight:0,
+			boxStyle:{
+				'height':0,
+				'width':'750upx',
+			},
+			k:0,
+			playIngIds:[],//正在播放的视频id列队，列队用于处理滑动过快导致的跳频问题
+			ready:false,
+			//isDragging:false//用户是否正在拖动列表
+        },
+		watch:{
+			k(k,old_k){
+				this.dataList[k].state = 'play'
+				this.dataList[old_k].state = 'stop'
+			},
+		},
+		onShow(){
+			console.log('回到前台');
+		},
+		onHide(){
+			console.log('到后台');
+			//this.$refs.video[this.k].pause();
+		},
+		onLoad(){
+			this.wHeight = uni.getSystemInfoSync().windowHeight;
+			this.boxStyle.height = this.wHeight;
+			console.log(this.wHeight);
+			this.getData(e=>{
+				//this.$refs.video[0].play();
+				this.dataList[0].state = 'play';
+				this.ready = true;
+			});
+		},
+		onReady() {
+		},
+        methods: {
+			//点击播放&&暂停
+			tapVideoHover(state,event){
+				console.log('state--',state);
+				if(state=='play'||state=='continue'){
+					this.dataList[this.k].state = 'pause';
+				}else{
+					this.dataList[this.k].state = 'continue';
+				}
+			},
+			toComment(){
+				uni.showToast({
+					title:'抽屉式评论区域，敬请期待',
+					icon:'none'
+				})
+			},
+			share(){
+				uni.showToast({
+					title:'分享功能，敬请期待',
+					icon:'none'
+				})
+			},
+			cLike(video_id,sss){
+				//console.log(video_id)
+				const video = this.dataList[this.k];
+				sss?video.like_n -= 1:video.like_n += 1;
+			},
+			getData(callback=e=>{}){
+				for (let i = 0; i < 5; i++) {
+					this.dataList.push({
+						title:"温州威客网络科技有限公司",
+						msg:"一家专业uniapp开发（nvue，uniapp模式）的软件外包公司",
+						state : 'pause',
+						like :  i%2>0,
+						like_n : i,
+						src : 'https://cloud.video.taobao.com//play/u/1768198696/p/1/e/6/t/1/239439242603.mp4',
+						videoImg : ''
+					});
+				}
+				setTimeout(e=>{//模拟接口请求时间为1秒
+					callback()
+				},1000);
+			}
+        }
+    }
+</script>
+<style>
+    .container {flex: 1;background-color: #eeeeee;}
+    .item {
+		width : 750upx;
+		background-color: #000000;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+	.videoHover{
+		position: absolute;
+		top: 0;
+		left: 0;
+		flex: 1;
+		background-color: rgba(0,0,0,0.1);
+		justify-content: center;
+		align-items: center;
+		
+		/* border-style: dashed;
+		border-color: #DD524D;
+		border-width: 1px; */
+	}
+	.playState{
+		width:  80upx;
+		height: 80upx;
+	}
+	.userInfo{
+		position: absolute;
+		bottom:250upx;
+		right: 15px;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		
+	}
+	.userAvatar{
+		border-radius: 500%;
+		margin-bottom: 15px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #ffffff;
+	}
+	.userAvatar{
+		width : 90upx;
+		height: 90upx;
+	}
+	.likeIco,.shareIco,.commentIco{
+		width : 60upx;
+		height: 60upx;
+		margin-top: 15px;
+	}
+	.likeNum,.commentNum,.shareTex{
+		color: #ffffff;
+		font-size: 30upx;
+		text-align: center;
+		margin: 5px;
+	}
+	.likeNumActive{
+		color: red;
+	}
+	.content{
+	  width: 720upx;
+	  z-index: 99;
+	  position: absolute;
+	  bottom: 10px;
+	  justify-content: center;
+	  padding: 15upx;
+	  flex-direction: column;
+	  justify-content: flex-start;
+	  color: #ffffff;
+	}
+	.userName {
+	  font-size: 30upx;
+	  color: #ffffff;
+	}
+	.words {
+	  margin-top: 10upx;
+	  font-size: 30upx;
+	  color: #ffffff;
+	}
+</style>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #id_test_video {
+            width: 100%;
+            height: auto;
+        }
+        
+        .aa {
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: red;
+            z-index: 99;
+        }
+    </style>
+    <script src="./TcPlayer-2.3.2.js" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div id="id_test_video"></div>
+    <div class="aa">232323</div>
+</body>
+<script>
+    var clicentHeight = document.documentElement.clientHeight;
+    console.log(clicentHeight)
+    var player = new TcPlayer('id_test_video', {
+        "m3u8": "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8", //请替换成实际可用的播放地址
+        // "autoplay": true, //iOS 下 safari 浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+        "poster": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1035415831,1465727770&fm=26&gp=0.jpg",
+        "width": '480', //视频的显示宽度，请尽量使用视频分辨率宽度
+        "height": clicentHeight, //视频的显示高度，请尽量使用视频分辨率高度
+        preload: 'auto',
+        bigPlayButton: true,
+        plugins: {
+            ProgressMarker: true
+        }
+    });
+</script>
+
+</html>
